@@ -3,8 +3,11 @@ export const MAP = {
     src: '../assets/tiles.png',
     tileSize: 64,
 
-    mapWidth: 20,
-    mapHeight: 20,
+    mapWidth: 30,
+    mapHeight: 30,
+
+    randomPositionnement : [0.6,0.5,0.4,0.5],
+    defaultBackground : 2,
 
     listTiles: {
         'grass': 1,
@@ -26,7 +29,7 @@ export const MAP = {
 
     background: {
         conditions: ['grass', 'dirt', 'tree'],
-        'grass': [0.05, 0.90, 0.05], // la somme en ligne doit faire 1
+        'grass': [0.8, 0, 0.2], // la somme en ligne doit faire 1
         'dirt': [0.05, 0.95, 0],
         'tree': [0, 0.7, 0.3]
     },
