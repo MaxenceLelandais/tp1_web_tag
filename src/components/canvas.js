@@ -9,7 +9,7 @@ export function canvas() {
     const canvas = document.createElement('canvas');
     canvas.id = 'canvas';
 
-    loadImage('tileAtlas', '../assets/tiles.png');
+    loadImage('tileAtlas', MAP.src);
 
     scene.tileMap = new TileMap(asset.tileAtlas, MAP.tileSize);
 
@@ -30,6 +30,6 @@ function loadImage(key, src) {
 function render() {
 
     scene.tileMap.render(scene.context, 0);
-    scene.tileMap.render(scene.context, 1);
+    //scene.tileMap.render(scene.context, 1);
 
 }

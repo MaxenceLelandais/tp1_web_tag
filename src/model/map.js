@@ -3,12 +3,14 @@ import { MAP } from "../data/sprite.js";
 
 export function createMap() {
     const mapping = [];
-    const background = createBackground2('grass');
+    const background = createBackground(MAP.startTile);
     mapping.push(background);
-
+    /**
     Object.keys(MAP.layerList).forEach(layer => {
         mapping.push(createLayer(MAP.layerList[layer], background));
     })
+    */
+    console.log(mapping);
     return mapping;
 }
 
@@ -40,54 +42,64 @@ function getNextValue(layer, list) {
     return MAP.listTiles[layer.conditions[position]];
 }
 
-function recursifCreationBackground(background, x, y, initial) {
+function recursifCreationBackground(background, x, y, initial, profondeur) {
 
-    if (x >= 0 && x < MAP.mapWidth && y >= 0 && y < MAP.mapHeight) {
-        background[y][x] = initial - 1;
-
+    if (x >= 0 && x < MAP.mapWidth && y >= 0 && y < MAP.mapHeight && profondeur < 600) {
+        
+        background[y][x] = initial;
         initial = MAP.listReverseTiles[initial];
 
-        if (y + 1 < MAP.mapHeight) {
-            if (background[y + 1][x] === MAP.defaultBackground && Math.random() > MAP.randomPositionnement[0]) {
-                let initial2 = getNextValue(MAP.background, MAP.background[initial]);
-                recursifCreationBackground(background, x, y + 1, initial2);
-            }
-        }
+        const listCoords = [[0,x, y + 1], [1,x + 1, y], [2,x, y - 1], [3,x - 1, y]];
 
-        if (x + 1 < MAP.mapWidth) {
-            if (background[y][x + 1] === MAP.defaultBackground && Math.random() > MAP.randomPositionnement[1]) {
-                let initial2 = getNextValue(MAP.background, MAP.background[initial]);
-                recursifCreationBackground(background, x + 1, y, initial2);
+        listCoords.forEach(coords => {
+            if (coords[0] >= 0 && coords[1] < MAP.mapWidth && coords[2] >= 0 && coords[2] < MAP.mapHeight) {
+                if (background[coords[2]][coords[1]] === MAP.defaultBackground && (Math.random() > MAP.randomPositionnement[coords[0]] || (x === MAP.mapWidth / 2 && y ===MAP.mapHeight / 2))) {
+                    recursifCreationBackground(background, coords[1], coords[2], getNextValue(MAP.background, MAP.background[initial]), ++profondeur);
+                }
             }
-        }
+        })
+    }
+}
 
-        if (y - 1 >= 0) {
-            if (background[y - 1][x] === MAP.defaultBackground && Math.random() > MAP.randomPositionnement[2]) {
-                let initial2 = getNextValue(MAP.background, MAP.background[initial]);
-                recursifCreationBackground(background, x, y - 1, initial2);
-            }
-        }
+function filtrage(background) {
+    for (let y = 0; y < MAP.mapHeight; y++) {
+        for (let x = 0; x < MAP.mapWidth; x++) {
+            for (let dy = -1; dy < 2; dy++) {
+                for (let dx = -1; dx < 2; dx++) {
 
-        if (x - 1 >= 0) {
-            if (background[y][x - 1] === MAP.defaultBackground && Math.random() > MAP.randomPositionnement[3]) {
-                let initial2 = getNextValue(MAP.background, MAP.background[initial]);
-                recursifCreationBackground(background, x - 1, y, initial2);
+                    if (!(dx ===0 && dy === 0)){
+                        if (x + dx >= 0 && x + dx < MAP.mapWidth && y + dy >= 0 && y + dy < MAP.mapHeight) {
+                            let value = Math.abs(background[y + dy][x + dx]);
+                            let value2 = Math.abs(background[y][x]);
+                            if (value - value2 > 0){
+                                background[y + dy][x + dx] = value2 + 1;
+                            } else if (value - value2 < 0){
+                                background[y + dy][x + dx] = value2 - 1;
+                            } else {
+                                background[y + dy][x + dx] = value;
+                            }
+                        }
+                    }
+                }
             }
         }
     }
 }
 
-function createBackground2(initial) {
+function createBackground(initial) {
     const background = initializeLayer();
-    recursifCreationBackground(background, MAP.mapWidth / 2, MAP.mapHeight / 2, MAP.listTiles[initial]);
+    recursifCreationBackground(background, MAP.mapWidth / 2, MAP.mapHeight / 2, MAP.listTiles[initial],0);
+    recursifCreationBackground(background, 0,0, MAP.listTiles[initial],0);
+    recursifCreationBackground(background, 0,MAP.mapHeight-1, MAP.listTiles[initial],0);
+    recursifCreationBackground(background, MAP.mapWidth-1,0, MAP.listTiles[initial],0);
+    recursifCreationBackground(background, MAP.mapWidth-1,MAP.mapHeight-1, MAP.listTiles[initial],0);
+    filtrage(background);
     return background;
 }
-
 
 function createLayer(layer, background) {
 
     const layerMap = [];
-
     for (let y = 0; y < MAP.mapHeight; y++) {
         const row = [];
         for (let x = 0; x < MAP.mapWidth; x++) {
@@ -102,9 +114,7 @@ function createLayer(layer, background) {
                 }
                 position++;
             });
-
             const key = layer.conditions[position];
-
 
             if (key === 'treetop') {
                 if (y - 1 >= 0) {
@@ -114,11 +124,8 @@ function createLayer(layer, background) {
             } else {
                 row.push(MAP.listTiles[key] - 1);
             }
-
         }
-
         layerMap.push(row);
     }
-
     return layerMap;
 }
