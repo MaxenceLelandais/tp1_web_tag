@@ -15,10 +15,10 @@ export default class TileMap {
                 let element = this.map[layer][y][x]--;
                 ctx.drawImage(
                     this.tileAtlas,
-                    this.tileSize * element,
+                    MAP.tileSize * element,
                     0,
-                    this.tileSize,
-                    this.tileSize,
+                    MAP.tileSize,
+                    MAP.tileSize,
                     x * this.tileSize,
                     y * this.tileSize,
                     this.tileSize,
