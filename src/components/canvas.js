@@ -9,12 +9,14 @@ export function canvas() {
     const canvas = document.createElement('canvas');
     canvas.id = 'canvas';
 
-    loadImage('tileAtlas', '../assets/tiles.png');
+    loadImage('tileAtlas', MAP.src);
 
-    scene.tileMap = new TileMap(asset.tileAtlas, MAP.tileSize);
+    scene.tileMap = new TileMap(asset.tileAtlas, MAP.drawSize);
 
-    canvas.height = MAP.mapHeight * MAP.tileSize;
-    canvas.width = MAP.mapWidth * MAP.tileSize;
+    console.log(MAP.mapHeight , MAP.drawSize);
+
+    canvas.height = MAP.mapHeight * MAP.drawSize;
+    canvas.width = MAP.mapWidth * MAP.drawSize;
 
     scene.context = canvas.getContext('2d');
 
@@ -30,6 +32,6 @@ function loadImage(key, src) {
 function render() {
 
     scene.tileMap.render(scene.context, 0);
-    scene.tileMap.render(scene.context, 1);
+    //scene.tileMap.render(scene.context, 1);
 
 }
