@@ -44,12 +44,12 @@ function getNextValue(layer, list) {
 
 function recursifCreationBackground(background, x, y, initial, profondeur) {
 
-    if (x >= 0 && x < MAP.mapWidth && y >= 0 && y < MAP.mapHeight && profondeur < 600) {
+    if (x >= 0 && x < MAP.mapWidth && y >= 0 && y < MAP.mapHeight && profondeur < 2000) {
         
         background[y][x] = initial;
         initial = MAP.listReverseTiles[initial];
 
-        const listCoords = [[0,x, y + 1], [1,x + 1, y], [2,x, y - 1], [3,x - 1, y]];
+        const listCoords = [[1,x, y - 1],[3,x - 1, y], [4,x + 1, y],  [6,x, y + 1], [7,x +1, y+1], [5,x - 1, y + 1],[0,x - 1, y - 1], [2,x + 1, y - 1],];
 
         listCoords.forEach(coords => {
             if (coords[0] >= 0 && coords[1] < MAP.mapWidth && coords[2] >= 0 && coords[2] < MAP.mapHeight) {
@@ -88,11 +88,10 @@ function filtrage(background) {
 
 function createBackground(initial) {
     const background = initializeLayer();
+    
     recursifCreationBackground(background, MAP.mapWidth / 2, MAP.mapHeight / 2, MAP.listTiles[initial],0);
-    recursifCreationBackground(background, 0,0, MAP.listTiles[initial],0);
-    recursifCreationBackground(background, 0,MAP.mapHeight-1, MAP.listTiles[initial],0);
-    recursifCreationBackground(background, MAP.mapWidth-1,0, MAP.listTiles[initial],0);
-    recursifCreationBackground(background, MAP.mapWidth-1,MAP.mapHeight-1, MAP.listTiles[initial],0);
+    
+
     filtrage(background);
     return background;
 }

@@ -3,11 +3,12 @@ export const MAP = {
     src1: '../assets/tiles.png',
     src: '../assets/tiles2.png',
     tileSize: 64,
+    drawSize : 4,
 
-    mapWidth: 100,
-    mapHeight: 100,
+    mapWidth: 1200,
+    mapHeight: 1000,
 
-    randomPositionnement : [0.3,0.3,0.3,0.3],
+    randomPositionnement : [0.3, 0.6, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
     defaultBackground : 0,
     startTile : 'deepwater',
 
@@ -61,14 +62,14 @@ export const MAP = {
 
     background: {
         conditions: ['deepwater', 'water', 'sand', 'dirt', 'grass', 'tree', 'stone', 'snow'],
-        'deepwater': [0.9,0.1,0,0,0,0,0,0], 
-        'water': [0.3,0.5,0.2,0,0,0,0,0], 
-        'sand': [0,0.1,0.6,0,0.3,0,0,0], 
-        'dirt': [0,0,0.2,0.7,0.1,0,0,0], 
-        'grass': [0,0,0.2,0,0.4,0.4,0,0], 
-        'tree': [0,0,0,0,0.3,0.5,0.2,0], 
-        'stone': [0,0,0,0,0,0.2,0.6,0.2], 
-        'snow': [0,0,0,0,0,0.2,0.6,0.2], 
+        'deepwater': [0.8,0.2,0,0,0,0,0,0], 
+        'water': [0.025,0.95,0.025,0,0,0,0,0], 
+        'sand': [0,0.025,0.95,0.025,0,0,0,0], 
+        'dirt': [0,0,0.025,0.95,0.025,0,0,0], 
+        'grass': [0,0,0,0.025,0.95,0.025,0,0], 
+        'tree': [0,0,0,0,0.025,0.95,0.025,0], 
+        'stone': [0,0,0,0,0,0.025,0.95,0.025], 
+        'snow': [0,0,0,0,0,0.2,0.7,0.1], 
     },
 
     layerList: {
