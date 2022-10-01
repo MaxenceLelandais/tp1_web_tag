@@ -13,8 +13,6 @@ export function canvas() {
 
     scene.tileMap = new TileMap(asset.tileAtlas, MAP.drawSize);
 
-    console.log(MAP.mapHeight , MAP.drawSize);
-
     canvas.height = MAP.mapHeight * MAP.drawSize;
     canvas.width = MAP.mapWidth * MAP.drawSize;
 

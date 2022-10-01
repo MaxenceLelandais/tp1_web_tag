@@ -12,11 +12,11 @@ export default class TileMap {
     render(ctx, layer) {
         for (let y = 0; y < MAP.mapHeight; y++) {
             for (let x = 0; x < MAP.mapWidth; x++) {
-                let element = this.map[layer][y][x]--;
+                const element = MAP.decompress(this.map[layer][y][x]--);
                 ctx.drawImage(
                     this.tileAtlas,
-                    MAP.tileSize * element,
-                    0,
+                    MAP.tileSize * element[0],
+                    MAP.tileSize * element[1],
                     MAP.tileSize,
                     MAP.tileSize,
                     x * this.tileSize,

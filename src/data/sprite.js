@@ -1,75 +1,60 @@
 export const MAP = {
 
-    src1: '../assets/tiles.png',
-    src: '../assets/tiles2.png',
-    tileSize: 64,
-    drawSize : 4,
+    src: '../assets/tiles.png',
+    tileSize: 32,
+    drawSize : 32,
 
-    mapWidth: 1200,
-    mapHeight: 1000,
+    mapWidth: 30,
+    mapHeight: 30,
 
     randomPositionnement : [0.3, 0.6, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
-    defaultBackground : 0,
+    defaultBackground : [0,0],
     startTile : 'deepwater',
 
-    listTiles1: {
-        'grass': 1,
-        'dirt': 2,
-        'tree': 3,
-        'treetop': 4,
-        'bush': 5,
-        'void': 6
-    },
-
     listTiles: {
-        'deepwater': 1,
-        'water': 2,
-        'sand': 3,
-        'dirt': 4,
-        'grass': 5,
-        'tree': 6,
-        'stone': 7,
-        'snow': 8
+
+        base : {
+            'deepwater': [0,20], 
+            'water': [0,18],
+            'sand': [0,3], 
+            'grass': [0,0],
+            'wall': [0, 27],
+            couches : {
+                'deepwater': 1, 
+                'water': 2,
+                'sand': 3, 
+                'grass': 4,
+                'wall': 5,
+            }
+        }
+
+    },
+    
+    decompress(nombre) {
+        return [(nombre - nombre % 100)/100, nombre % 100];
     },
 
-
-    listReverseTiles1: {
-        1: 'grass',
-        2: 'dirt',
-        3: 'tree',
-        4: 'treetop',
-        5: 'bush',
-        6: 'void'
+    compress(liste){
+        return liste[0] * 100 + liste[1]
     },
 
-    listReverseTiles: {
-        1: 'deepwater',
-        2: 'water',
-        3: 'sand',
-        4: 'dirt',
-        5: 'grass',
-        6: 'tree',
-        7: 'stone',
-        8: 'snow'
-    },
+    reverseTiles(dictionnary) {
 
-    background1: {
-        conditions: ['grass', 'dirt', 'tree'],
-        'grass': [0.8, 0, 0.2], // la somme en ligne doit faire 1
-        'dirt': [0.05, 0.95, 0],
-        'tree': [0, 0.7, 0.3]
+        const newDictionnary = {};
+        Object.keys(dictionnary).forEach(key => {
+            newDictionnary[dictionnary[key]] = key;
+        })
+
+        return newDictionnary;
     },
 
     background: {
-        conditions: ['deepwater', 'water', 'sand', 'dirt', 'grass', 'tree', 'stone', 'snow'],
-        'deepwater': [0.8,0.2,0,0,0,0,0,0], 
-        'water': [0.025,0.95,0.025,0,0,0,0,0], 
-        'sand': [0,0.025,0.95,0.025,0,0,0,0], 
-        'dirt': [0,0,0.025,0.95,0.025,0,0,0], 
-        'grass': [0,0,0,0.025,0.95,0.025,0,0], 
-        'tree': [0,0,0,0,0.025,0.95,0.025,0], 
-        'stone': [0,0,0,0,0,0.025,0.95,0.025], 
-        'snow': [0,0,0,0,0,0.2,0.7,0.1], 
+        conditions: ['deepwater', 'water', 'sand', 'grass','wall'],
+        'deepwater': [0.95,0.05,0,0,0],
+        'water': [0.4,0.5,0.1,0,0],
+        'sand': [0,0.1,0.75,0.1,0.05], 
+        'grass': [0,0.1,0.1,0.75,0.05], 
+        'wall': [0,0,0.1,0.1,0.8], 
     },
 
     layerList: {
