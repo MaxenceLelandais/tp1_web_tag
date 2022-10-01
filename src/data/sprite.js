@@ -4,10 +4,10 @@ export const MAP = {
     tileSize: 32,
     drawSize : 32,
 
-    mapWidth: 30,
-    mapHeight: 30,
+    mapWidth: 300,
+    mapHeight: 300,
 
-    randomPositionnement : [0.3, 0.6, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
+    randomPositionnement : [0.9, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
     defaultBackground : [0,0],
     startTile : 'deepwater',
 
@@ -50,11 +50,11 @@ export const MAP = {
 
     background: {
         conditions: ['deepwater', 'water', 'sand', 'grass','wall'],
-        'deepwater': [0.95,0.05,0,0,0],
-        'water': [0.4,0.5,0.1,0,0],
-        'sand': [0,0.1,0.75,0.1,0.05], 
-        'grass': [0,0.1,0.1,0.75,0.05], 
-        'wall': [0,0,0.1,0.1,0.8], 
+        'deepwater': [0.9,0.1,0,0,0],
+        'water': [0.05,0.9,0.05,0,0],
+        'sand': [0,0.05,0.9,0.05,0], 
+        'grass': [0,0,0.05,0.9,0.05], 
+        'wall': [0,0,0.05,0.05,0.9], 
     },
 
     layerList: {
