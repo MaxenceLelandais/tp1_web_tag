@@ -1,75 +1,63 @@
 export const MAP = {
-
-    src1: '../assets/tiles.png',
     src: '../assets/tiles2.png',
     tileSize: 64,
-    drawSize : 4,
+    drawSize : 64,
 
-    mapWidth: 1200,
-    mapHeight: 1000,
+    mapWidth: 150,
+    mapHeight: 100,
 
     randomPositionnement : [0.3, 0.6, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
     defaultBackground : 0,
     startTile : 'deepwater',
 
-    listTiles1: {
-        'grass': 1,
-        'dirt': 2,
-        'tree': 3,
-        'treetop': 4,
-        'bush': 5,
-        'void': 6
-    },
-
     listTiles: {
         'deepwater': 1,
-        'water': 2,
-        'sand': 3,
-        'dirt': 4,
-        'grass': 5,
-        'tree': 6,
-        'stone': 7,
-        'snow': 8
+        'midlewater' : 2,
+        'water': 3,
+        'watersand' : 4,
+        'sand': 5,
+        'grasssand' : 6,
+        'grass': 7,
+        'tree': 8,
+        'dirt': 9,
+        'blackdirt': 10,
+        'stone': 11,
+        'stonesnow': 12,
+        'snow': 13
     },
 
-
-    listReverseTiles1: {
-        1: 'grass',
-        2: 'dirt',
-        3: 'tree',
-        4: 'treetop',
-        5: 'bush',
-        6: 'void'
-    },
 
     listReverseTiles: {
         1: 'deepwater',
-        2: 'water',
-        3: 'sand',
-        4: 'dirt',
-        5: 'grass',
-        6: 'tree',
-        7: 'stone',
-        8: 'snow'
-    },
-
-    background1: {
-        conditions: ['grass', 'dirt', 'tree'],
-        'grass': [0.8, 0, 0.2], // la somme en ligne doit faire 1
-        'dirt': [0.05, 0.95, 0],
-        'tree': [0, 0.7, 0.3]
+        2: 'midlewater',
+        3: 'water',
+        4: 'watersand',
+        5: 'sand',
+        6: 'grasssand',
+        7: 'grass',
+        8: 'tree',
+        9: 'dirt',
+        10: 'blackdirt',
+        11: 'stone',
+        12: 'stonesnow',
+        13: 'snow'
     },
 
     background: {
-        conditions: ['deepwater', 'water', 'sand', 'dirt', 'grass', 'tree', 'stone', 'snow'],
-        'deepwater': [0.8,0.2,0,0,0,0,0,0], 
-        'water': [0.025,0.95,0.025,0,0,0,0,0], 
-        'sand': [0,0.025,0.95,0.025,0,0,0,0], 
-        'dirt': [0,0,0.025,0.95,0.025,0,0,0], 
-        'grass': [0,0,0,0.025,0.95,0.025,0,0], 
-        'tree': [0,0,0,0,0.025,0.95,0.025,0], 
-        'stone': [0,0,0,0,0,0.025,0.95,0.025], 
-        'snow': [0,0,0,0,0,0.2,0.7,0.1], 
+        conditions: ['deepwater', 'midlewater','water','watersand','sand','grasssand','grass','tree','dirt','blackdirt','stone','stonesnow','snow'],
+        'deepwater': [0.8,0.2,0,0,0,0,0,0,0,0,0,0,0], 
+        'midlewater': [0.025,0.95,0.025,0,0,0,0,0,0,0,0,0,0],
+        'water': [0,0.025,0.95,0.025,0,0,0,0,0,0,0,0,0],
+        'watersand': [0,0,0.025,0.95,0.025,0,0,0,0,0,0,0,0],
+        'sand': [0,0,0,0.025,0.95,0.025,0,0,0,0,0,0,0],
+        'grasssand': [0,0,0,0,0.025,0.95,0.025,0,0,0,0,0,0],
+        'grass': [0,0,0,0,0,0.025,0.95,0.025,0,0,0,0,0],
+        'tree': [0,0,0,0,0,0,0.025,0.95,0.025,0,0,0,0],
+        'dirt': [0,0,0,0,0,0,0,0.025,0.95,0.025,0,0,0],
+        'blackdirt': [0,0,0,0,0,0,0,0,0.025,0.95,0.025,0,0],
+        'stone': [0,0,0,0,0,0,0,0,0,0.025,0.95,0.025,0],
+        'stonesnow': [0,0,0,0,0,0,0,0,0,0,0.025,0.95,0.025],
+        'snow': [0,0,0,0,0,0,0,0,0,0,0.2,0.7,0.1],
     },
 
     layerList: {

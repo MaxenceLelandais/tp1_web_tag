@@ -10,14 +10,11 @@ export function canvas() {
     canvas.id = 'canvas';
 
     loadImage('tileAtlas', MAP.src);
-
     scene.tileMap = new TileMap(asset.tileAtlas, MAP.drawSize);
-
     console.log(MAP.mapHeight , MAP.drawSize);
 
     canvas.height = MAP.mapHeight * MAP.drawSize;
     canvas.width = MAP.mapWidth * MAP.drawSize;
-
     scene.context = canvas.getContext('2d');
 
     return canvas;
