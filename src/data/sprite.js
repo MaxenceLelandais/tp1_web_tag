@@ -3,10 +3,10 @@ export const MAP = {
     tileSize: 64,
     drawSize : 64,
 
-    mapWidth: 150,
-    mapHeight: 100,
+    mapWidth: 10,
+    mapHeight: 10,
 
-    randomPositionnement : [0.3, 0.6, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
+    randomPositionnement : [0.6, 0.6, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
     defaultBackground : 0,
     startTile : 'deepwater',
 
