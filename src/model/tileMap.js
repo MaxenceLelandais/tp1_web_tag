@@ -18,7 +18,7 @@ export default class TileMap {
                 ctx.drawImage(
                     this.tileAtlas,
                     MAP.tileSize * element,
-                    0,
+                    MAP.tileSize * layer,
                     MAP.tileSize,
                     MAP.tileSize,
                     x * this.tileSize,

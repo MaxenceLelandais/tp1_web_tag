@@ -1,18 +1,18 @@
 import { MAP } from "../data/sprite.js";
 
 export default class Map {
-        
+
     constructor(width, height) {
         this.width = width;
         this.height = height;
         const mapping = [];
         const background = this.createBackground(MAP.startTile);
         mapping.push(background);
-        /**
+
         Object.keys(MAP.layerList).forEach(layer => {
-            mapping.push(createLayer(MAP.layerList[layer], background));
+            mapping.push(this.createLayer(MAP.layerList[layer], background));
         })
-        */
+
         return mapping;
     }
 
@@ -44,19 +44,19 @@ export default class Map {
         return MAP.listTiles[layer.conditions[position]];
     }
 
-    recursifCreationBackground(background, x, y, initial, profondeur) {
+    recursifCreationBackground(background, x, y, initial, listReverseTiles, profondeur) {
 
         if (x >= 0 && x < this.width && y >= 0 && y < this.height && profondeur < 2000) {
-            
-            background[y][x] = initial;
-            initial = MAP.listReverseTiles[initial];
 
-            const listCoords = [[1,x, y - 1],[3,x - 1, y], [4,x + 1, y],  [6,x, y + 1], [7,x +1, y+1], [5,x - 1, y + 1],[0,x - 1, y - 1], [2,x + 1, y - 1],];
+            background[y][x] = initial;
+            initial = listReverseTiles[initial];
+
+            const listCoords = [[1, x, y - 1], [3, x - 1, y], [4, x + 1, y], [6, x, y + 1], [7, x + 1, y + 1], [5, x - 1, y + 1], [0, x - 1, y - 1], [2, x + 1, y - 1],];
 
             listCoords.forEach(coords => {
                 if (coords[0] >= 0 && coords[1] < this.width && coords[2] >= 0 && coords[2] < this.height) {
-                    if (background[coords[2]][coords[1]] === MAP.defaultBackground && (Math.random() > MAP.randomPositionnement[coords[0]] || (x === MAP.mapWidth / 2 && y ===MAP.mapHeight / 2))) {
-                        this.recursifCreationBackground(background, coords[1], coords[2], this.getNextValue(MAP.background, MAP.background[initial]), ++profondeur);
+                    if (background[coords[2]][coords[1]] === MAP.defaultBackground && (Math.random() > MAP.randomPositionnement[coords[0]] || (x === MAP.mapWidth / 2 && y === MAP.mapHeight / 2))) {
+                        this.recursifCreationBackground(background, coords[1], coords[2], this.getNextValue(MAP.background, MAP.background[initial]), listReverseTiles, ++profondeur);
                     }
                 }
             })
@@ -69,13 +69,13 @@ export default class Map {
                 for (let dy = -1; dy < 2; dy++) {
                     for (let dx = -1; dx < 2; dx++) {
 
-                        if (!(dx ===0 && dy === 0)){
+                        if (!(dx === 0 && dy === 0)) {
                             if (x + dx >= 0 && x + dx < this.width && y + dy >= 0 && y + dy < this.height) {
                                 let value = Math.abs(background[y + dy][x + dx]);
                                 let value2 = Math.abs(background[y][x]);
-                                if (value - value2 > 0){
+                                if (value - value2 > 0) {
                                     background[y + dy][x + dx] = value2 + 1;
-                                } else if (value - value2 < 0){
+                                } else if (value - value2 < 0) {
                                     background[y + dy][x + dx] = value2 - 1;
                                 } else {
                                     background[y + dy][x + dx] = value;
@@ -90,14 +90,17 @@ export default class Map {
 
     createBackground(initial) {
         const background = this.initializeLayer();
-        
-        this.recursifCreationBackground(background, this.width / 2, this.height / 2, MAP.listTiles[initial],0);
+        const listReverseTiles = MAP.reverseTiles(MAP.listTiles);
+        console.log(listReverseTiles);
+
+        this.recursifCreationBackground(background, this.width / 2, this.height / 2, MAP.listTiles[initial], listReverseTiles, 0);
 
         this.filtrage(background);
         return background;
     }
 
     createLayer(layer, background) {
+        const listReverseTiles = MAP.reverseTiles(MAP.listTiles);
 
         const layerMap = [];
         for (let y = 0; y < this.height; y++) {
@@ -107,23 +110,16 @@ export default class Map {
                 let proba = Math.random();
                 let position = 0;
 
-                layer[MAP.listReverseTiles[background[y][x] + 1]].forEach(element => {
+                layer[listReverseTiles[background[y][x] + 1]].forEach(element => {
                     proba -= element;
                     if (proba < 0) {
                         return true;
                     }
                     position++;
                 });
-                const key = layer.conditions[position];
 
-                if (key === 'treetop') {
-                    if (y - 1 >= 0) {
-                        layerMap[y - 1][x] = MAP.listTiles[key] - 1;
-                    }
-                    row.push(5);
-                } else {
-                    row.push(MAP.listTiles[key] - 1);
-                }
+                row.push(MAP.listTilesLayer[layer.conditions[position]]);
+
             }
             layerMap.push(row);
         }
