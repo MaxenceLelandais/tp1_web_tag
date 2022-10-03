@@ -14,16 +14,18 @@ export function canvas() {
     return canvas;
 }
 
-export function refreshCanvas(tileSize, width, height, change) {
+export function refreshCanvas(maxSize, width, height, change) {
 
     const canvas = document.getElementById('canvas');
-    canvas.height = height * tileSize;
-    canvas.width = width * tileSize;
+
+    const size = parseInt((maxSize === -1 ? window.innerHeight + parseInt(height) : maxSize) / height);
+    canvas.height = height * size;
+    canvas.width = width * size;
 
     if (change) {
-        scene.tileMap = new TileMap(asset.tileAtlas, tileSize, width, height);
+        scene.tileMap = new TileMap(asset.tileAtlas, size, width, height);
     } else {
-        scene.tileMap.tileSize = tileSize;
+        scene.tileMap.tileSize = size;
     }
     render();
 }

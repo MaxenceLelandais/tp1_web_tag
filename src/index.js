@@ -3,4 +3,4 @@ import { formGenerationMap } from "./components/formGenerationMap.js";
 
 document.body.appendChild(formGenerationMap());
 document.body.appendChild(canvas());
-refreshCanvas(1, document.getElementById('widthMap').value, document.getElementById('heightMap').value, true);
+refreshCanvas(400, document.getElementById('sizeMap').value * 2, document.getElementById('sizeMap').value, true);

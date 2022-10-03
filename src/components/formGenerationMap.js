@@ -4,30 +4,28 @@ export function formGenerationMap() {
     const div = document.createElement('div');
     div.id = 'formGenerationMap';
 
-    div.appendChild(addRange('widthMap', 10, 400, 'x = ', ' tiles'));
-    div.appendChild(addRange('heightMap', 10, 400, 'y = ', ' tiles'));
+    div.appendChild(addRange('sizeMap', 10, 200, ' x ', ' tiles' ));
 
     const buttonGenerate = document.createElement('button');
     buttonGenerate.id = 'buttonGenerate';
     buttonGenerate.append('Génération');
     buttonGenerate.onclick = () => {
-        refreshCanvas(1, document.getElementById('widthMap').value, document.getElementById('heightMap').value, true);
+        refreshCanvas(400, document.getElementById('sizeMap').value * 2, document.getElementById('sizeMap').value, true);
     };
     div.append(buttonGenerate);
-
 
     const buttonValidate = document.createElement('button');
     buttonValidate.id = 'buttonValidate';
     buttonValidate.append('Valider');
     buttonValidate.onclick = () => {
-        refreshCanvas(32, document.getElementById('widthMap').value, document.getElementById('heightMap').value, false);
+        refreshCanvas(-1, document.getElementById('sizeMap').value * 2, document.getElementById('sizeMap').value, false);
         div.innerHTML = '';
     };
     div.append(buttonValidate);
     return div;
 }
 
-function addRange(id, min, max, startText, endText) {
+function addRange(id, min, max, text, endText) {
     const div = document.createElement('div');
     const range = document.createElement('input');
     range.id = id;
@@ -37,13 +35,13 @@ function addRange(id, min, max, startText, endText) {
     range.max = max;
 
     const output = document.createElement('output');
-    actualizeValue(range, output, startText, endText)
-    range.oninput = () => actualizeValue(range, output, startText, endText);
+    actualizeValue(range, output, text, endText)
+    range.oninput = () => actualizeValue(range, output, text, endText);
     div.append(range, output)
 
     return div;
 }
 
-function actualizeValue(range, output, startText, endText) {
-    output.value = startText + range.value + endText;
+function actualizeValue(range, output, text, endText) {
+    output.value = range.value * 2 + text + range.value + endText;
 }

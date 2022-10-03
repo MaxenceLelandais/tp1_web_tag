@@ -91,7 +91,6 @@ export default class Map {
     createBackground(initial) {
         const background = this.initializeLayer();
         const listReverseTiles = MAP.reverseTiles(MAP.listTiles);
-        console.log(listReverseTiles);
 
         this.recursifCreationBackground(background, this.width / 2, this.height / 2, MAP.listTiles[initial], listReverseTiles, 0);
 
