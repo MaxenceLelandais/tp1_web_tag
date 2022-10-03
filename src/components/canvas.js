@@ -8,16 +8,26 @@ export function canvas() {
 
     const canvas = document.createElement('canvas');
     canvas.id = 'canvas';
-
     loadImage('tileAtlas', MAP.src);
-    scene.tileMap = new TileMap(asset.tileAtlas, MAP.drawSize);
-    console.log(MAP.mapHeight , MAP.drawSize);
-
-    canvas.height = MAP.mapHeight * MAP.drawSize;
-    canvas.width = MAP.mapWidth * MAP.drawSize;
     scene.context = canvas.getContext('2d');
 
     return canvas;
+}
+
+export function refreshCanvas(maxSize, width, height, change) {
+
+    const canvas = document.getElementById('canvas');
+
+    const size = parseInt((maxSize === -1 ? window.innerHeight + parseInt(height) : maxSize) / height);
+    canvas.height = height * size;
+    canvas.width = width * size;
+
+    if (change) {
+        scene.tileMap = new TileMap(asset.tileAtlas, size, width, height);
+    } else {
+        scene.tileMap.tileSize = size;
+    }
+    render();
 }
 
 function loadImage(key, src) {
@@ -27,8 +37,7 @@ function loadImage(key, src) {
 }
 
 function render() {
-
     scene.tileMap.render(scene.context, 0);
-    //scene.tileMap.render(scene.context, 1);
-
+    scene.tileMap.render(scene.context, 1);
 }
+
