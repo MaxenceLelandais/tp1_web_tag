@@ -63,7 +63,7 @@ export default class Map {
         }
     }
 
-    filtrage(background) {
+    filtrage(background, modeRandom) {
         for (let y = 0; y < this.height; y++) {
             for (let x = 0; x < this.width; x++) {
                 for (let dy = -1; dy < 2; dy++) {
@@ -73,12 +73,16 @@ export default class Map {
                             if (x + dx >= 0 && x + dx < this.width && y + dy >= 0 && y + dy < this.height) {
                                 let value = Math.abs(background[y + dy][x + dx]);
                                 let value2 = Math.abs(background[y][x]);
+                                let ajout = 1;
+                                if (modeRandom){
+                                    if(Math.abs(value - value2) > 1 && Math.random()>MAP.randomFiltreLissage && value2 + 2<13 && value2 - 2>=0){
+                                        ajout = 2;
+                                    }
+                                }
                                 if (value - value2 > 0) {
-                                    background[y + dy][x + dx] = value2 + 1;
+                                    background[y + dy][x + dx] = value2 + ajout;
                                 } else if (value - value2 < 0) {
-                                    background[y + dy][x + dx] = value2 - 1;
-                                } else {
-                                    background[y + dy][x + dx] = value;
+                                    background[y + dy][x + dx] = value2 - ajout;
                                 }
                             }
                         }
@@ -94,7 +98,8 @@ export default class Map {
 
         this.recursifCreationBackground(background, this.width / 2, this.height / 2, MAP.listTiles[initial], listReverseTiles, 0);
 
-        this.filtrage(background);
+        this.filtrage(background, true);        
+        this.filtrage(background, false);
         return background;
     }
 

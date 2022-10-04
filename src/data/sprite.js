@@ -7,6 +7,7 @@ export const MAP = {
     mapHeight: 10,
 
     randomPositionnement: [0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0.1],
+    randomFiltreLissage : 0.5,
     defaultBackground: 0,
     startTile: 'deepwater',
 
