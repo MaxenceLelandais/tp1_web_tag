@@ -50,7 +50,6 @@ export default class Map {
 
             background[y][x] = initial;
             initial = listReverseTiles[initial];
-
             const listCoords = [[1, x, y - 1], [3, x - 1, y], [4, x + 1, y], [6, x, y + 1], [7, x + 1, y + 1], [5, x - 1, y + 1], [0, x - 1, y - 1], [2, x + 1, y - 1],];
 
             listCoords.forEach(coords => {
@@ -97,7 +96,6 @@ export default class Map {
         const listReverseTiles = MAP.reverseTiles(MAP.listTiles);
 
         this.recursifCreationBackground(background, this.width / 2, this.height / 2, MAP.listTiles[initial], listReverseTiles, 0);
-
         this.filtrage(background, true);        
         this.filtrage(background, false);
         return background;
@@ -105,7 +103,6 @@ export default class Map {
 
     createLayer(layer, background) {
         const listReverseTiles = MAP.reverseTiles(MAP.listTiles);
-
         const layerMap = [];
         for (let y = 0; y < this.height; y++) {
             const row = [];
@@ -123,7 +120,6 @@ export default class Map {
                 });
 
                 row.push(MAP.listTilesLayer[layer.conditions[position]]);
-
             }
             layerMap.push(row);
         }

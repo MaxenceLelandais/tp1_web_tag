@@ -6,21 +6,20 @@ const scene = {};
 
 export function canvas() {
 
-    const canvas = document.createElement('canvas');
-    canvas.id = 'canvas';
+    const canvas = $('<canvas id="canvas"></canvas>');
     loadImage('tileAtlas', MAP.src);
-    scene.context = canvas.getContext('2d');
+    scene.context = canvas.get(0).getContext('2d');
 
     return canvas;
 }
 
-export function refreshCanvas(maxSize, width, height, change) {
+export function refreshCanvas(maxSize, change) {
 
-    const canvas = document.getElementById('canvas');
+    const width = $('#sizeMap').val() * 2;
+    const height = $('#sizeMap').val();
 
     const size = parseInt((maxSize === -1 ? window.innerHeight + parseInt(height) : maxSize) / height);
-    canvas.height = height * size;
-    canvas.width = width * size;
+    $('canvas').attr('height', height * size).attr('width', width * size);
 
     if (change) {
         scene.tileMap = new TileMap(asset.tileAtlas, size, width, height);
