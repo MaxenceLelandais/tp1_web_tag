@@ -1,11 +1,3 @@
-/*
-Les sprites pour les personnages sont la propriété intellectuelle de l'utilisateur 
-de OpenGameArt.org Antifarea qui permet l'utilisation gratuite de ses sprites.
-Le lien pour accéder à la page des sprites est : 
-https://opengameart.org/content/antifareas-rpg-sprite-set-1-enlarged-w-transparent-background-fixed
-*/
-
-
 export const MAP = {
     src: '../assets/tiles2.png',
     tileSize: 64,
