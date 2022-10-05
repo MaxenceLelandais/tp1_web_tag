@@ -6,3 +6,33 @@ canvas{
 body{
     overflow: hidden;
 }
+
+.grid{
+    border: 1px solid #333;
+    margin: 5px;
+    height: min-content;
+    width: 150px;
+}
+
+.playerClass{
+    background-color: white;
+    border: 1px solid #ccc;
+    height: 50px;
+    padding: 0px;
+    width: 50px;
+}
+
+.listPlayer{
+    margin: 5px;
+    height: min-content;
+    width:  min-content;
+}
+.player{
+    background-color: white;
+    border: 1px solid #ccc;
+   
+    padding: 0px;
+    height: min-content;
+    width:  min-content;
+    
+}

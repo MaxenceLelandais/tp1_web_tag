@@ -90,3 +90,35 @@ export const MAP = {
         }
     }
 }
+
+export const PLAYER = {
+    listClass : {
+        src : './assets/playerClass/',
+        type : '.png',
+        list : ['default', 'fisherman', 'forest', 'mountain', 'sand', 'snow'],
+        'default' : {
+            effectsList : {},
+            effectsText : ''
+        },
+        'fisherman' : {
+            effectsList : {},
+            effectsText : 'sand +7, water +3, ..'
+        },
+        'forest' : {
+            effectsList : {},
+            effectsText : 'sand +7, water +3, ..'
+        },
+        'mountain' : {
+            effectsList : {},
+            effectsText : 'sand +7, water +3, ..'
+        },
+        'sand' : {
+            effectsList : {},
+            effectsText : 'sand +7, water +3, ..'
+        },
+        'snow' : {
+            effectsList : {},
+            effectsText : 'sand +7, water +3, ..'
+        }
+    }
+}
