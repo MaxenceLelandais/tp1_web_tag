@@ -92,6 +92,8 @@ export const MAP = {
 }
 
 export const PLAYER = {
+    width : 32,
+    height : 36,
     listClass : {
         src : './assets/playerClass/',
         type : '.png',
@@ -120,5 +122,23 @@ export const PLAYER = {
             effectsList : {},
             effectsText : 'sand +7, water +3, ..'
         }
+    },
+
+    player1 : {
+        commands: {
+            'ArrowLeft': 3,
+            'ArrowRight': 1,
+            'ArrowUp' :0,
+            'ArrowDown':2,
+        },
+    },
+
+    player2 : {
+        commands: {
+            'q':3,
+            'd':1,
+            'z':0,
+            's':2,
+        },
     }
 }
