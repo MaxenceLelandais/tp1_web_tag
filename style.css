@@ -1,15 +1,11 @@
-#canvasMap{
+.mapGame{
     position: absolute; /* postulat de départ */
     top: 50%; left: 50%; /* à 50%/50% du parent référent */
     transform: translate(-50%, -50%); /* décalage de 50% de sa propre taille */
 }
-body{
+/* body{
     overflow: hidden;
-}
-
-.player{ 
-    float:left; 
-}
+} */
 
 
 .listPlayer{
@@ -19,11 +15,8 @@ body{
 }
 .player{
     background-color: white;
-    border: 1px solid #ccc;
-   
-    padding: 0px;
-    height: min-content;
-    width:  min-content;
+    float:center;
+    padding : 10px;
 }
 
 .selectedplayer1{

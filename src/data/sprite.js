@@ -99,28 +99,37 @@ export const PLAYER = {
         type : '.png',
         list : ['default', 'fisherman', 'forest', 'mountain', 'sand', 'snow'],
         'default' : {
-            effectsList : {},
-            effectsText : ''
+            effectsList : [],
         },
         'fisherman' : {
-            effectsList : {},
-            effectsText : 'sand +7, water +3, ..'
+            effectsList : [
+                ['sand', '+3'],
+                ['water', '+3'],
+            ],
         },
         'forest' : {
-            effectsList : {},
-            effectsText : 'sand +7, water +3, ..'
+            effectsList : [
+                ['sand', '+7'],
+                ['water', '-3']
+            ],
         },
         'mountain' : {
-            effectsList : {},
-            effectsText : 'sand +7, water +3, ..'
+            effectsList : [
+                ['sand', '+7'],
+                ['water', '-3']
+            ],
         },
         'sand' : {
-            effectsList : {},
-            effectsText : 'sand +7, water +3, ..'
+            effectsList : [
+                ['sand', '+7'],
+                ['water', '-3']
+            ],
         },
         'snow' : {
-            effectsList : {},
-            effectsText : 'sand +7, water +3, ..'
+            effectsList : [
+                ['sand', '+7'],
+                ['water', '-3']
+            ],
         }
     },
 

@@ -29,23 +29,24 @@ export default class Character {
 
     setCanvas(){
         return $('<canvas></canvas>')
+        
                 .attr('id', this.player + 'Canvas')
-                .attr('width', this.stage.width)
-                .attr('height', this.stage.height)
+                .attr('width', this.stage.width*2)
+                .attr('height', this.stage.height*2)
                 .ready(() => {
                     this.loop($('#'+this.player + 'Canvas').get(0).getContext('2d'))
                 })
     }
 
     loop(ctx) {
-        ctx.clearRect(0, 0, this.stage.width, this.stage.height);
+        ctx.clearRect(0, 0, this.stage.width*2, this.stage.height*2);
         this.move();
         this.render(ctx);
 
     
         setTimeout(() => {
             window.requestAnimationFrame(() => this.loop(ctx));
-        }, 33);
+        }, 150);
     }
 
     move() {
@@ -68,8 +69,8 @@ export default class Character {
             PLAYER.height,
             0,
             0,
-            PLAYER.width,
-            PLAYER.height,
+            PLAYER.width * 2,
+            PLAYER.height * 2,
         );
 
         ctx.restore();
