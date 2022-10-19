@@ -9,7 +9,7 @@ canvas{
 }
 
 .leaderboardSection {
-    background-color: black;
+    background-color: darkslateblue;
     border-radius: 5px;
     height: 500px;
     margin: 100px auto 0;
@@ -20,11 +20,13 @@ canvas{
 
 .leaderboardSection ul {
     display: flex;
+    width: 100%;
 }
 
 .leaderboardSection ul li {
     color: #3a3d51;
     cursor: pointer;
+    display: flex;
 
 }
 
