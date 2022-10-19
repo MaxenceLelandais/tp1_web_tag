@@ -1,4 +1,8 @@
 import $ from 'jquery';
+
+/**
+ *
+ */
 export function game() {
   const ctx = $('.mapGame').get(0).getContext('2d');
   ctx.font = '30px Arial';

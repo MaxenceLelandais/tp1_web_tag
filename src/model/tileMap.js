@@ -1,7 +1,17 @@
 import {MAP} from '../data/sprite.js';
 import Map from './map.js';
 
+/**
+ * TileMap
+ */
 export default class TileMap {
+  /**
+     * constructor
+     * @param {*} tileAtlas
+     * @param {*} tileSize
+     * @param {*} width
+     * @param {*} height
+     */
   constructor(tileAtlas, tileSize, width, height) {
     this.tileAtlas = tileAtlas;
     this.tileSize = tileSize;
@@ -10,6 +20,11 @@ export default class TileMap {
     this.map = new Map(this.width, this.height);
   }
 
+  /**
+   *
+   * @param {*} ctx
+   * @param {*} layer
+   */
   render(ctx, layer) {
     for (let y = 0; y < this.height; y++) {
       for (let x = 0; x < this.width; x++) {

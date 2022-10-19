@@ -1,12 +1,19 @@
 import $ from 'jquery';
 import {PLAYER} from '../data/sprite.js';
 
+/**
+ *
+ */
 export default class Character {
   stage = {};
   keysDown = {};
   sourceX = 1;
   sourceY = 2;
 
+  /**
+   *
+   * @param {*} player
+   */
   constructor(player) {
     this.player = player;
     this.stage.width = PLAYER.width;
@@ -21,12 +28,21 @@ export default class Character {
     });
   }
 
+  /**
+   *
+   * @param {*} playerClass
+   */
   setPlayerClass(playerClass) {
     this.playerClass = playerClass;
     this.img = new Image();
-    this.img.src = PLAYER.listClass.src +this.playerClass+ PLAYER.listClass.type;
+    this.img.src = PLAYER.listClass.src +this.playerClass+
+                   PLAYER.listClass.type;
   }
 
+  /**
+   *
+   * @return {Object}
+   */
   setCanvas() {
     return $('<canvas></canvas>')
 
@@ -38,6 +54,10 @@ export default class Character {
         });
   }
 
+  /**
+   *
+   * @param {*} ctx
+   */
   loop(ctx) {
     ctx.clearRect(0, 0, this.stage.width*2, this.stage.height*2);
     this.move();
@@ -49,6 +69,9 @@ export default class Character {
     }, 150);
   }
 
+  /**
+   *
+   */
   move() {
     Object.keys(PLAYER[this.player].commands).forEach((command) => {
       if (this.keysDown[command]) {
@@ -58,6 +81,10 @@ export default class Character {
     });
   }
 
+  /**
+   *
+   * @param {*} ctx
+   */
   render(ctx) {
     ctx.save();
 

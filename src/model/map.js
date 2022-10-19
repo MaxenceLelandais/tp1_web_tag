@@ -1,6 +1,15 @@
 import {MAP} from '../data/sprite.js';
 
+/**
+ *
+ */
 export default class Map {
+  /**
+     *
+     * @param {*} width
+     * @param {*} height
+     * @return {Object}
+     */
   constructor(width, height) {
     this.width = width;
     this.height = height;
@@ -15,6 +24,10 @@ export default class Map {
     return mapping;
   }
 
+  /**
+   *
+   * @return {Object}
+   */
   initializeLayer() {
     const layer = [];
 
@@ -28,6 +41,12 @@ export default class Map {
     return layer;
   }
 
+  /**
+   *
+   * @param {*} layer
+   * @param {*} list
+   * @return {Object}
+   */
   getNextValue(layer, list) {
     let proba = Math.random();
     let position = 0;
@@ -43,6 +62,15 @@ export default class Map {
     return MAP.listTiles[layer.conditions[position]];
   }
 
+  /**
+   *
+   * @param {*} background
+   * @param {*} x
+   * @param {*} y
+   * @param {*} initial
+   * @param {*} listReverseTiles
+   * @param {*} profondeur
+   */
   recursifCreationBackground(background, x, y, initial, listReverseTiles, profondeur) {
     if (x >= 0 && x < this.width && y >= 0 && y < this.height && profondeur < 2000) {
       background[y][x] = initial;
@@ -59,6 +87,11 @@ export default class Map {
     }
   }
 
+  /**
+   *
+   * @param {*} background
+   * @param {*} modeRandom
+   */
   filtrage(background, modeRandom) {
     for (let y = 0; y < this.height; y++) {
       for (let x = 0; x < this.width; x++) {
@@ -87,6 +120,11 @@ export default class Map {
     }
   }
 
+  /**
+   *
+   * @param {*} initial
+   * @return {Object}
+   */
   createBackground(initial) {
     const background = this.initializeLayer();
     const listReverseTiles = MAP.reverseTiles(MAP.listTiles);
@@ -97,6 +135,12 @@ export default class Map {
     return background;
   }
 
+  /**
+   *
+   * @param {*} layer
+   * @param {*} background
+   * @return {Object}
+   */
   createLayer(layer, background) {
     const listReverseTiles = MAP.reverseTiles(MAP.listTiles);
     const layerMap = [];

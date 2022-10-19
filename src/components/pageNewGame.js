@@ -5,6 +5,10 @@ import {refreshCanvas} from './mapGame.js';
 import {canvas} from './mapGame.js';
 import {game} from './game.js';
 
+/**
+ *
+ * @return {Object}
+ */
 export function pageNewGame() {
   return $('<div></div>')
       .css('text-align', 'center')
@@ -25,7 +29,9 @@ export function pageNewGame() {
                             $('#size').text(50 * 2 + ' x ' + 50 + ' tiles');
                           }),
                   )
-                  .append($('<label class="input-group-text" id="size"></label>')),
+                  .append(
+                      $('<label class="input-group-text" id="size"></label>'),
+                  ),
 
           )
           .append(
@@ -43,7 +49,9 @@ export function pageNewGame() {
                   .on('click', () => {
                     $('body').css('overflow', 'hidden');
                     $('#canvasMap').addClass('mapGame');
-                    refreshCanvas(-1, $('sizeMap').val() * 2, $('sizeMap').val(), false);
+                    refreshCanvas(
+                        -1, $('sizeMap').val() * 2, $('sizeMap').val(), false,
+                    );
                     game();
                     $('#newGame').remove();
                   }),
@@ -52,6 +60,12 @@ export function pageNewGame() {
       .append(canvas());
 }
 
+/**
+ *
+ * @param {*} idPlayer1
+ * @param {*} idPlayer2
+ * @return {Object}
+ */
 function initPlayer(idPlayer1, idPlayer2) {
   const character = new Character(idPlayer1);
   return $('<div class ="player"></div>')
@@ -77,6 +91,13 @@ function initPlayer(idPlayer1, idPlayer2) {
       );
 }
 
+/**
+ *
+ * @param {*} character
+ * @param {*} idPlayer1
+ * @param {*} idPlayer2
+ * @return {Object}
+ */
 function drawGrid(character, idPlayer1, idPlayer2) {
   const grid = $('<div class="grid"></div>');
 
@@ -100,6 +121,12 @@ function drawGrid(character, idPlayer1, idPlayer2) {
   return grid;
 }
 
+/**
+ *
+ * @param {*} id
+ * @param {*} playerClass
+ * @return {Object}
+ */
 function loadClassEffectsList(id, playerClass) {
   $('#tbody'+id).remove();
   return $('#'+id)
