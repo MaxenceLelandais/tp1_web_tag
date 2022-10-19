@@ -11,4 +11,4 @@ https://opengameart.org/content/antifareas-rpg-sprite-set-1-enlarged-w-transpare
 Et voici le site pour la tile map que nous avons modifié pour satisfaire nos besoins, malheureusement, je ne sais pas qui l'a crée.
 https://www.pikpng.com/transpng/JxJmRT/
 
-La musique pour le jeu est la propriété intellectuelle de plusieurs compositeurs/interprètes/artistes musicaux qui sont Howard Shore, Adrian Von Ziegler, Two Steps From Hell, Ihsan Dincer, Brunuhville, Henrik Airaksinen et de Peter Crowley
+La musique pour le jeu est la propriété intellectuelle de plusieurs compositeurs/interprètes/artistes musicaux qui sont Howard Shore, Adrian Von Ziegler, Two Steps From Hell, Ihsan Dincer, Brunuhville, Henrik Airaksinen, Brian Tyler, Olivier Derivière et de Peter Crowley
