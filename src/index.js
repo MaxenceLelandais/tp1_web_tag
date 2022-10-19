@@ -1,3 +1,4 @@
-import { pageNewGame } from "./components/pageNewGame.js";
+import $ from 'jquery';
+import {pageNewGame} from './components/pageNewGame.js';
 
 $('body').append(pageNewGame());

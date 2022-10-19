@@ -1,0 +1,33 @@
+{
+  "name": "tp1_web_tag",
+  "version": "1.0.0",
+  "description": "création d'un jeu vidéo de type TAG en web",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "doc": "jsdoc --configure jsdoc.config.json",
+    "eslint:init": "eslint --init",
+    "lint": "eslint --fix --ignore-path .gitignore .",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MaxenceLelandais/tp1_web_tag.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MaxenceLelandais/tp1_web_tag/issues"
+  },
+  "homepage": "https://github.com/MaxenceLelandais/tp1_web_tag#readme",
+  "devDependencies": {
+    "eslint": "^8.25.0",
+    "eslint-config-google": "^0.14.0",
+    "jsdoc": "^3.6.11",
+    "webpack": "^5.74.0",
+    "webpack-cli": "^4.10.0"
+  },
+  "dependencies": {
+    "jquery": "^3.6.1"
+  }
+}
