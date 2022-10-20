@@ -1,0 +1,41 @@
+body{
+    overflow: hidden;
+}
+
+canvas{
+    position: absolute; /* postulat de départ */
+    top: 50%; left: 50%; /* à 50%/50% du parent référent */
+    transform: translate(-50%, -50%); /* décalage de 50% de sa propre taille */
+}
+
+.leaderboardSection {
+    background-color: darkslateblue;
+    border-radius: 5px;
+    height: 500px;
+    margin: 100px auto 0;
+    padding: 25px 40px;
+    position: relative;
+    width: 500px;
+}
+
+.leaderboardSection ul {
+    display: flex;
+    width: 100%;
+}
+
+.leaderboardSection ul li {
+    color: #3a3d51;
+    cursor: pointer;
+    display: flex;
+
+}
+
+.leaderboardSection ul li:hover,
+.leaderboardSection ul li.active {
+    color: #fff;
+}
+
+.wrapper {
+    height: 100%;
+    width: 100%;
+}

@@ -5,7 +5,7 @@ export function enregistrerScore(nomJoueur, classeJoueur, mapChoisie, score) {
     let compteur = 0;
     const index = [];
 
-    listeJoueur.forEach( (joeur) => {
+    listeJoueur.forEach( (joueur) => {
         if( parseInt(joueur.split('-')[3] <= score)) {
             index.push(compteur);
         }
