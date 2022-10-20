@@ -3,7 +3,7 @@ import {PLAYER} from '../data/sprite.js';
 import Character from './character.js';
 import {refreshCanvas} from './mapGame.js';
 import {canvas} from './mapGame.js';
-import {game} from './game.js';
+import {Game} from './game.js';
 
 /**
  *
@@ -49,10 +49,10 @@ export function pageNewGame() {
                   .on('click', () => {
                     $('body').css('overflow', 'hidden');
                     $('#canvasMap').addClass('mapGame');
-                    refreshCanvas(
+                    const tileMap = refreshCanvas(
                         -1, $('sizeMap').val() * 2, $('sizeMap').val(), false,
                     );
-                    game();
+                    new Game(tileMap);
                     $('#newGame').remove();
                   }),
           ),
@@ -78,7 +78,7 @@ function initPlayer(idPlayer1, idPlayer2) {
               .append($('<input class="form-control" placeholder="Nom" lenght="20"></input>').attr('id', idPlayer1+'Nom')),
           ),
       )
-      .append($('<label class="input-group-text justify-content-center">Classes : default</label>').attr('id', idPlayer1+'Class'))
+      .append($('<label class="input-group-text justify-content-center">default</label>').attr('id', idPlayer1+'Class'))
       .append(drawGrid(character, idPlayer1, idPlayer2))
       .append($('<label class="input-group-text justify-content-center">Caractéristiques : </label>'))
       .append($('<table class="table"></table>').attr('id', idPlayer1+'ClassLegend')
@@ -107,7 +107,7 @@ function drawGrid(character, idPlayer1, idPlayer2) {
         .attr('id', idPlayer1+className)
         .append($('<img></img>').attr('src', PLAYER.listClass.src + className + 'Preview'+ PLAYER.listClass.type))
         .on('click', function() {
-          $('#'+idPlayer1+'Class').text('Classes : '+className);
+          $('#'+idPlayer1+'Class').text(className);
           loadClassEffectsList(idPlayer1+'ClassLegend', PLAYER.listClass[className]);
           $('#'+idPlayer1+'Image').attr('src', PLAYER.listClass.src + className + 'Preview'+ PLAYER.listClass.type);
           $('.selected'+idPlayer1).removeClass('selected'+idPlayer1);
@@ -133,10 +133,10 @@ function loadClassEffectsList(id, playerClass) {
       .append($('<tbody></tbody>')
           .attr('id', 'tbody'+id)
           .ready(function() {
-            playerClass.effectsList.forEach(function(effect) {
+            Object.keys(playerClass.effectsList).forEach(function(effect) {
               $('#tbody'+id).append($('<tr></tr>')
-                  .append($('<td></td>').text(effect[0]))
-                  .append($('<td></td>').append(effect[1])),
+                  .append($('<td></td>').text(effect))
+                  .append($('<td></td>').text(PLAYER.initSpeed + playerClass.effectsList[effect])),
               );
             });
           }),

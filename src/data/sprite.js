@@ -43,6 +43,15 @@ export const MAP = {
     'void': 11,
   },
 
+  listTilesLayerObstacles: {
+    3: 'treestump',
+    6: 'rock3',
+    7: 'rock4',
+    8: 'cactus1',
+    9: 'cactus2',
+    10: 'cactus3',
+  },
+
 
   reverseTiles(listTiles) {
     const newDict = {};
@@ -100,60 +109,62 @@ export const MAP = {
 export const PLAYER = {
   width: 32,
   height: 36,
+  initSpeed: 11,
+  timer: 60,
   listClass: {
     'src': './assets/playerClass/',
     'type': '.png',
     'list': ['default', 'fisherman', 'forest', 'mountain', 'sand', 'snow'],
     'default': {
-      effectsList: [],
+      effectsList: {},
     },
     'fisherman': {
-      effectsList: [
-        ['sand', '+3'],
-        ['water', '+3'],
-      ],
+      effectsList: {
+        'sand': 10,
+        'water': -10,
+      },
     },
     'forest': {
-      effectsList: [
-        ['sand', '+7'],
-        ['water', '-3'],
-      ],
+      effectsList: {
+        'sand': -10,
+        'water': 10,
+      },
     },
     'mountain': {
-      effectsList: [
-        ['sand', '+7'],
-        ['water', '-3'],
-      ],
+      effectsList: {
+        'sand': 7,
+        'water': -3,
+      },
     },
     'sand': {
-      effectsList: [
-        ['sand', '+7'],
-        ['water', '-3'],
-      ],
+      effectsList: {
+        'sand': 7,
+        'water': -3,
+      },
     },
     'snow': {
-      effectsList: [
-        ['sand', '+7'],
-        ['water', '-3'],
-      ],
+      effectsList: {
+        'sand': 7,
+        'water': -3,
+      },
     },
   },
 
   player1: {
     commands: {
-      'ArrowLeft': 3,
-      'ArrowRight': 1,
-      'ArrowUp': 0,
-      'ArrowDown': 2,
+      'ArrowLeft': [3, [-1, 0]],
+      'ArrowRight': [1, [1, 0]],
+      'ArrowUp': [0, [0, -1]],
+      'ArrowDown': [2, [0, 1]],
     },
   },
 
   player2: {
     commands: {
-      'a': 3,
-      'd': 1,
-      'w': 0,
-      's': 2,
+      'q': [3, [-1, 0]],
+      'd': [1, [1, 0]],
+      'z': [0, [0, -1]],
+      's': [2, [0, 1]],
     },
   },
 };

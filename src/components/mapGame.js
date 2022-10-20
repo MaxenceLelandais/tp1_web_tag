@@ -11,20 +11,24 @@ const scene = {};
  */
 export function canvas() {
   const canvas = $('<canvas id="canvasMap"></canvas>');
+
+
   loadImage('tileAtlas', MAP.src);
   scene.context = canvas.get(0).getContext('2d');
 
-  return canvas;
+  return $('<div id="map"></div>').append(canvas);
 }
 
 /**
  *
  * @param {*} maxSize
  * @param {*} change
+ * @return {Object}
  */
 export function refreshCanvas(maxSize, change) {
   const width = $('#sizeMap').val() * 2;
   const height = $('#sizeMap').val();
+
 
   const size = parseInt((
     maxSize === -1 ? window.innerHeight + parseInt(height) : maxSize) / height);
@@ -36,6 +40,7 @@ export function refreshCanvas(maxSize, change) {
     scene.tileMap.tileSize = size;
   }
   render();
+  return scene.tileMap;
 }
 
 /**
