@@ -9,7 +9,7 @@ import Character from './character.js';
  */
 export class Game {
   /**
-    * Initialise le jeu
+    * Initialise le jeu.
     * @param {*} tileMap
     */
   constructor(tileMap) {
@@ -52,9 +52,9 @@ export class Game {
   }
 
   /**
-    * Cette fonction est appellé par les joueurs s'il se touchent.
+    * Cette fonction est appelée par les joueurs s'ils se touchent.
     * Change le joueur chasseur, freez le nouveau chasseur et
-    * rend invulnérable l'ancient chasseur pour éviter tous contact.
+    * rend invulnérable l'ancien chasseur pour éviter tous contacts.
     * Initialise le temps de freez et l'invulnérabilité à 2 secondes.
     * @param {*} nbr
     */
@@ -98,8 +98,8 @@ export class Game {
   /**
    * Il s'occupe du temps.
    * Soustrait le temps de vie au joueur chasseur,
-   * gère le délais de 2 secondes pour unfreez et
-   * rendre l'ancient chasseur vulnérable aux contacts.
+   * gère le délai de 2 secondes pour unfreez et
+   * rends l'ancien chasseur vulnérable aux contacts.
    * @param {*} player
    */
   timer() {

@@ -59,10 +59,7 @@ function loadImage(key, src) {
  */
 function render() {
   if (scene.tileMap != undefined) {
-    const d = new Date();
     scene.tileMap.render(scene.context, 0);
     scene.tileMap.render(scene.context, 1);
-    const c = new Date();
-    console.log('temps layers :' + (c.getTime() - d.getTime()));
   }
 }

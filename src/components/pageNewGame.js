@@ -2,8 +2,7 @@
 import $ from 'jquery';
 import {PLAYER} from '../data/sprite.js';
 import Character from './character.js';
-import {refreshCanvas} from './mapGame.js';
-import {canvas} from './mapGame.js';
+import {canvas, refreshCanvas} from './mapGame.js';
 import {Game} from './game.js';
 
 /**
@@ -14,14 +13,16 @@ import {Game} from './game.js';
 export function pageNewGame() {
   return $('<div></div>')
       .css('text-align', 'center')
-      .append($('<div id="newGame" class="container"></div>')
-
+      .append($('<div></div>')
+          .addClass('container')
+          .attr('id', 'newGame')
           .append($('<div></div>')
               .append(initPlayer('player1', 'player2'))
               .append(initPlayer('player2', 'player1')),
           )
           .append(
-              $('<div class="input-group justify-content-center mb-3"></div>')
+              $('<div></div>')
+                  .addClass('input-group justify-content-center mb-3')
                   .append(
                       $('<input value ="50" max="5000" step="2"></input>')
                           .addClass('slider-width100')
@@ -49,6 +50,7 @@ export function pageNewGame() {
               $('<button>Génération</button>')
                   .addClass('btn btn-primary')
                   .on('click', () => {
+                    $('#canvasMap').css('background-color', 'rgb(0, 153, 250)');
                     $('.player2Button').attr('disabled', true);
                     $('.player1Button').attr('disabled', true);
                     $('#validate').show();
@@ -82,9 +84,9 @@ export function pageNewGame() {
  */
 function initPlayer(idPlayer1, idPlayer2) {
   const character = new Character(idPlayer1);
+  character.sizeMulti = 2;
   return $('<div></div>')
       .addClass('player')
-
       .attr('id', idPlayer1)
       .append($('<div></div>')
           .append(character.setCanvas())
@@ -147,9 +149,9 @@ function drawGrid(character, idPlayer1, idPlayer2) {
                     .attr(
                         'src',
                         PLAYER.listClass.src +
-              className +
-              'Preview' +
-              PLAYER.listClass.type,
+                        className +
+                        'Preview' +
+                        PLAYER.listClass.type,
                     ),
             )
             .on('click', function() {
@@ -162,9 +164,9 @@ function drawGrid(character, idPlayer1, idPlayer2) {
                   .attr(
                       'src',
                       PLAYER.listClass.src +
-              className +
-              'Preview' +
-              PLAYER.listClass.type,
+                      className +
+                      'Preview' +
+                      PLAYER.listClass.type,
                   );
               $('.selected' + idPlayer1).removeClass('selected' + idPlayer1);
               $(this).addClass('selected' + idPlayer1);
@@ -196,7 +198,7 @@ function loadClassEffectsList(id, playerClass) {
                   .append($('<td></td>').text(effect))
                   .append($('<td></td>').text(
                       PLAYER.initSpeed +
-              playerClass.effectsList[effect]),
+                      playerClass.effectsList[effect]),
                   ),
               );
             });

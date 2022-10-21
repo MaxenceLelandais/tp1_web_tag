@@ -2,13 +2,13 @@ import {MAP} from '../data/sprite.js';
 import Map from './map.js';
 
 /**
- * Cette classe à pour but de créer une map et de l'afficher sur le canvas.
+ * Cette classe a pour but de créer une map et de l'afficher sur le canvas.
  */
 export default class TileMap {
   /**
      * Le constructeur garde en mémoire les données de base
      * pour le canvas et la map.
-     * Puis, il créer une map.
+     * Puis, il crée une map.
      * @param {*} tileAtlas
      * @param {*} tileSize
      * @param {*} width

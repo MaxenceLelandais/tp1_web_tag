@@ -4,9 +4,6 @@
     transform: translate(-50%, -50%); /* décalage de 50% de sa propre taille */
 }
 
-#canvasMap{
-    background-color: rgb(0, 153, 250);
-}
 .informationsGame{
     position : absolute;
     border-radius: 100px;

@@ -81,21 +81,21 @@ export default class Character {
     const c = $('#' + this.player + 'Canvas').get(0);
     const ctx = c.getContext('2d');
     ctx.beginPath();
+    ctx.lineWidth = 5;
     ctx.arc(
         this.positionX + this.stage.width / 2,
         this.positionY + this.stage.height / 2,
-        this.stage.height / 2,
+        this.stage.height / 2 - ctx.lineWidth,
         0,
         2 * Math.PI,
     );
-    ctx.lineWidth = 5;
+
     ctx.strokeStyle = '#FF0000';
     ctx.stroke();
   }
 
   /**
    * Affiche le joueur sur le canvas avec un emplacement aléatoire non bloquant.
-   * Semble instable jquery ne peut pas lire une propriété
    * @param {*} type
    * @return {Object}
    */
@@ -157,17 +157,17 @@ export default class Character {
    */
   loop(ctx) {
     ctx.clearRect(
-        this.positionX - this.stage.width * this.sizeMulti,
-        this.positionY - this.stage.height * this.sizeMulti,
-        this.positionX + this.stage.width * this.sizeMulti,
-        this.positionY + this.stage.height * this.sizeMulti,
+        this.positionX,
+        this.positionY,
+        this.positionX + (this.stage.width * this.sizeMulti),
+        this.positionY + (this.stage.height * this.sizeMulti),
     );
     this.move();
     this.render(ctx);
 
     setTimeout(() => {
       window.requestAnimationFrame(() => this.loop(ctx));
-    }, 100);
+    }, 50);
   }
 
   /**
@@ -202,7 +202,6 @@ export default class Character {
    * Permet de faire bouger le joueur en fonction des touches du clavier.
    * La vitesse dépend des caractéristiques de la classe et
    * des obstacles sur la map.
-   * crash dans move
    */
   move() {
     Object.keys(PLAYER[this.player].commands).forEach((command) => {
@@ -219,28 +218,7 @@ export default class Character {
               this.tileSize,
               this.reverseDictListTiles,
           );
-
-          if (valeur > 0) {
-            this.vitesse = valeur;
-            if (
-              this.positionX + dataMove[1][0] * this.vitesse >=
-              this.stage.height * this.sizeMulti &&
-              this.positionX + dataMove[1][0] * this.vitesse <=
-              window.innerWidth + this.diffWidth -
-              this.stage.width * this.sizeMulti
-            ) {
-              this.positionX += dataMove[1][0] * this.vitesse;
-            }
-
-            if (
-              this.positionY + dataMove[1][1] * this.vitesse >= 0 &&
-              this.positionY + dataMove[1][1] * this.vitesse <=
-              window.innerHeight + this.diffHeight -
-              this.stage.height * this.sizeMulti
-            ) {
-              this.positionY += dataMove[1][1] * this.vitesse;
-            }
-          }
+          this.gestionVitesse(valeur, dataMove);
         }
         if (this.vul) {
           const x2 = this.player2.positionX;
@@ -256,6 +234,35 @@ export default class Character {
         }
       }
     });
+  }
+
+  /**
+   * Gère la vitesse de déplacement sur le canvas.
+   * @param {*} valeur
+   * @param {*} dataMove
+   */
+  gestionVitesse(valeur, dataMove) {
+    if (valeur > 0) {
+      this.vitesse = valeur;
+      if (
+        this.positionX + dataMove[1][0] * this.vitesse >=
+              this.stage.height * this.sizeMulti &&
+              this.positionX + dataMove[1][0] * this.vitesse <=
+              window.innerWidth + this.diffWidth -
+              this.stage.width * this.sizeMulti
+      ) {
+        this.positionX += dataMove[1][0] * this.vitesse;
+      }
+
+      if (
+        this.positionY + dataMove[1][1] * this.vitesse >= 0 &&
+              this.positionY + dataMove[1][1] * this.vitesse <=
+              window.innerHeight + this.diffHeight -
+              this.stage.height * this.sizeMulti
+      ) {
+        this.positionY += dataMove[1][1] * this.vitesse;
+      }
+    }
   }
 
   /**
