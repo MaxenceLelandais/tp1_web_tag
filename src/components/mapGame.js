@@ -6,21 +6,20 @@ const asset = {};
 const scene = {};
 
 /**
- *
+ * Affiche la map vide.
  * @return {Object}
  */
 export function canvas() {
-  const canvas = $('<canvas id="canvasMap"></canvas>');
-
+  const canvas = $('<canvas></canvas>').attr('id', 'canvasMap');
 
   loadImage('tileAtlas', MAP.src);
   scene.context = canvas.get(0).getContext('2d');
 
-  return $('<div id="map"></div>').append(canvas);
+  return $('<div></div>').attr('id', 'map').append(canvas);
 }
 
 /**
- *
+ * Actualise le canvas en changeant sa taille et en affichant les tuiles dessus.
  * @param {*} maxSize
  * @param {*} change
  * @return {Object}
@@ -28,12 +27,13 @@ export function canvas() {
 export function refreshCanvas(maxSize, change) {
   const width = $('#sizeMap').val() * 2;
   const height = $('#sizeMap').val();
-
-
-  const size = parseInt((
+  let size = parseInt((
     maxSize === -1 ? window.innerHeight + parseInt(height) : maxSize) / height);
-  $('#canvasMap').attr('height', height * size).attr('width', width * size);
 
+  if (size < 1) {
+    size = 1;
+  }
+  $('#canvasMap').attr('height', height * size).attr('width', width * size);
   if (change) {
     scene.tileMap = new TileMap(asset.tileAtlas, size, width, height);
   } else {
@@ -44,7 +44,7 @@ export function refreshCanvas(maxSize, change) {
 }
 
 /**
- *
+ * Charge l'image qui contient toutes les tuiles.
  * @param {*} key
  * @param {*} src
  */
@@ -55,11 +55,14 @@ function loadImage(key, src) {
 }
 
 /**
- *
+ * Affiche les tuiles sur le canvas.
  */
 function render() {
-  if (scene.tileMap!=undefined) {
+  if (scene.tileMap != undefined) {
+    const d = new Date();
     scene.tileMap.render(scene.context, 0);
     scene.tileMap.render(scene.context, 1);
+    const c = new Date();
+    console.log('temps layers :' + (c.getTime() - d.getTime()));
   }
 }
