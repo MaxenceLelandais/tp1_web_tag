@@ -80,52 +80,54 @@ export default class Map {
       listReverseTiles,
       profondeur,
   ) {
-    if (
-      x >= 0 &&
+    if (background[y][x] === MAP.defaultBackground) {
+      if (
+        x >= 0 &&
       x < this.width &&
       y >= 0 &&
       y < this.height &&
       profondeur < 2000
-    ) {
-      background[y][x] = initial;
-      initial = listReverseTiles[initial];
+      ) {
+        background[y][x] = initial;
+        initial = listReverseTiles[initial];
 
-      const listCoords = [
-        [1, x, y - 1],
-        [3, x - 1, y],
-        [4, x + 1, y],
-        [6, x, y + 1],
-        [7, x + 1, y + 1],
-        [5, x - 1, y + 1],
-        [0, x - 1, y - 1],
-        [2, x + 1, y - 1],
-      ];
+        const listCoords = [
+          [1, x, y - 1],
+          [3, x - 1, y],
+          [4, x + 1, y],
+          [6, x, y + 1],
+          [7, x + 1, y + 1],
+          [5, x - 1, y + 1],
+          [0, x - 1, y - 1],
+          [2, x + 1, y - 1],
+        ];
 
-      listCoords.forEach((coords) => {
-        if (
-          coords[1] >= 0 &&
+        listCoords.forEach((coords) => {
+          if (
+            coords[1] >= 0 &&
           coords[1] < this.width &&
           coords[2] >= 0 &&
           coords[2] < this.height
-        ) {
-          if (
-            background[coords[2]][coords[1]] === MAP.defaultBackground &&
+          ) {
+            if (
+              background[coords[2]][coords[1]] === MAP.defaultBackground &&
             (
               Math.random() > MAP.randomPositionnement[coords[0]] ||
               (x === MAP.mapWidth / 2 && y === MAP.mapHeight / 2)
             )
-          ) {
-            this.recursifCreationBackground(
-                background,
-                coords[1],
-                coords[2],
-                this.getNextValue(MAP.background, MAP.background[initial]),
-                listReverseTiles,
-                ++profondeur,
-            );
+            ) {
+              this.recursifCreationBackground(
+                  background,
+                  coords[1],
+                  coords[2],
+                  this.getNextValue(MAP.background, MAP.background[initial]),
+                  listReverseTiles,
+                  ++profondeur,
+              );
+            }
           }
-        }
-      });
+        });
+      }
     }
   }
 
