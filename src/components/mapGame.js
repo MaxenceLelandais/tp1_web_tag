@@ -22,11 +22,13 @@ export function canvas() {
  * Actualise le canvas en changeant sa taille et en affichant les tuiles dessus.
  * @param {*} maxSize
  * @param {*} change
+ * @param {*} mode
  * @return {Object}
  */
-export function refreshCanvas(maxSize, change) {
+export function refreshCanvas(maxSize, change, mode) {
   const width = $('#sizeMap').val() * 2;
   const height = $('#sizeMap').val();
+  const animeGeneration = $('#animeGeneration').is(':checked');
   let size = parseInt((
     maxSize === -1 ? window.innerHeight + parseInt(height) : maxSize) / height);
 
@@ -35,11 +37,21 @@ export function refreshCanvas(maxSize, change) {
   }
   $('#canvasMap').attr('height', height * size).attr('width', width * size);
   if (change) {
-    scene.tileMap = new TileMap(asset.tileAtlas, size, width, height);
+    scene.tileMap = new TileMap(
+        scene.context,
+        asset.tileAtlas,
+        size,
+        width,
+        height,
+        animeGeneration,
+    );
   } else {
     scene.tileMap.tileSize = size;
   }
-  render();
+  if (!animeGeneration || mode) {
+    render();
+  }
+
   return scene.tileMap;
 }
 

@@ -6,14 +6,22 @@ import {MAP} from '../data/sprite.js';
  */
 export default class Map {
   /**
-     * Initialise la liste des layers et créer leur matrice.
-     * @param {*} width
-     * @param {*} height
-     * @return {Object}
-     */
-  constructor(width, height) {
+   * Initialise la liste des layers et créer leur matrice.
+   * @param {*} width
+   * @param {*} height
+   * @param {*} ctx
+   * @param {*} tileAtlas
+   * @param {*} tileSize
+   * @param {*} animeGeneration
+   * @return {Object}
+   */
+  constructor(width, height, ctx, tileAtlas, tileSize, animeGeneration) {
     this.width = width;
     this.height = height;
+    this.ctx = ctx;
+    this.tileAtlas = tileAtlas;
+    this.tileSize = tileSize;
+    this.animeGeneration = animeGeneration;
     const mapping = [];
     const background = this.createBackground(MAP.startTile);
     mapping.push(background);
@@ -60,6 +68,30 @@ export default class Map {
   }
 
   /**
+   *
+   * @param {*} x
+   * @param {*} y
+   * @param {*} initial
+   */
+  animeMap(x, y, initial) {
+    if (this.animeGeneration) {
+      setTimeout(() => {
+        this.ctx.drawImage(
+            this.tileAtlas,
+            MAP.tileSize * initial,
+            0,
+            MAP.tileSize,
+            MAP.tileSize,
+            x * this.tileSize,
+            y * this.tileSize,
+            this.tileSize,
+            this.tileSize,
+        );
+      }, 0);
+    }
+  }
+
+  /**
    * Génère récursivement les numéros correspondant aux tuiles dans la matrice.
    * La pile ne peut dépasser 2000 de profondeur.
    * Pour chaque position, il génère les nombres des cases aux alentours.
@@ -89,6 +121,7 @@ export default class Map {
       profondeur < 2000
       ) {
         background[y][x] = initial;
+        this.animeMap(x, y, initial);
         initial = listReverseTiles[initial];
 
         const listCoords = [
@@ -111,10 +144,7 @@ export default class Map {
           ) {
             if (
               background[coords[2]][coords[1]] === MAP.defaultBackground &&
-            (
-              Math.random() > MAP.randomPositionnement[coords[0]] ||
-              (x === MAP.mapWidth / 2 && y === MAP.mapHeight / 2)
-            )
+              Math.random() > MAP.randomPositionnement[coords[0]]
             ) {
               this.recursifCreationBackground(
                   background,
@@ -147,7 +177,24 @@ export default class Map {
           [-1, -1], [0, -1], [1, -1], [-1, 0], [1, 0], [-1, 1], [0, 1], [1, 1],
         ];
         liste.forEach((coords) => {
-          this.typeFiltre(x, y, coords[0], coords[1], background, modeRandom);
+          const dx = coords[0];
+          const dy =coords[1];
+
+          if (
+            x + dx >= 0 &&
+              x + dx < this.width &&
+              y + dy >= 0 &&
+              y + dy < this.height
+          ) {
+            if (
+              !(
+                background[y][x] === MAP.defaultBackground &&
+                background[y + dy][x + dx] === MAP.defaultBackground
+              )
+            ) {
+              this.typeFiltre(x, y, dx, dy, background, modeRandom);
+            }
+          }
         });
       }
     }
@@ -163,31 +210,26 @@ export default class Map {
    * @param {*} modeRandom
    */
   typeFiltre(x, y, dx, dy, background, modeRandom) {
-    if (
-      x + dx >= 0 &&
-        x + dx < this.width &&
-        y + dy >= 0 &&
-        y + dy < this.height
-    ) {
-      const value = Math.abs(background[y + dy][x + dx]);
-      const value2 = Math.abs(background[y][x]);
-      let ajout = 1;
-      if (modeRandom) {
-        if (
-          Math.abs(value - value2) > 1 &&
+    const value = Math.abs(background[y + dy][x + dx]);
+    const value2 = Math.abs(background[y][x]);
+    let ajout = 1;
+    if (modeRandom) {
+      if (
+        Math.abs(value - value2) > 1 &&
             Math.random() > MAP.randomFiltreLissage &&
             value2 + 2 < 13 &&
             value2 - 2 >= 0
-        ) {
-          ajout = 2;
-        }
+      ) {
+        ajout = 2;
       }
+    }
 
-      if (value - value2 > 0) {
-        background[y + dy][x + dx] = value2 + ajout;
-      } else if (value - value2 < 0) {
-        background[y + dy][x + dx] = value2 - ajout;
-      }
+    if (value - value2 > 0) {
+      background[y + dy][x + dx] = value2 + ajout;
+      this.animeMap(x + dx, y + dy, value2 + ajout);
+    } else if (value - value2 < 0) {
+      background[y + dy][x + dx] = value2 - ajout;
+      this.animeMap(x + dx, y + dy, value2 - ajout);
     }
   }
 

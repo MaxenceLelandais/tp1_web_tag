@@ -24,9 +24,10 @@ export function pageNewGame() {
               $('<div></div>')
                   .addClass('input-group justify-content-center mb-3')
                   .append(
-                      $('<input value ="50" max="5000" step="2"></input>')
+                      $('<input min="50" value ="50" max="1000"></input>')
                           .addClass('slider-width100')
                           .attr('id', 'sizeMap')
+                          .attr('step', '2')
                           .attr('type', 'range')
                           .on('input', function() {
                             $('#size').text(
@@ -47,6 +48,10 @@ export function pageNewGame() {
                   ),
           )
           .append(
+              $('<input type="checkbox">Animer la génération? </input>')
+                  .attr('id', 'animeGeneration'),
+          )
+          .append(
               $('<button>Génération</button>')
                   .addClass('btn btn-primary')
                   .on('click', () => {
@@ -54,7 +59,7 @@ export function pageNewGame() {
                     $('.player2Button').attr('disabled', true);
                     $('.player1Button').attr('disabled', true);
                     $('#validate').show();
-                    refreshCanvas(400, true);
+                    refreshCanvas(400, true, false);
                   }),
           )
           .append(
@@ -66,7 +71,7 @@ export function pageNewGame() {
                     $('body').css('overflow', 'hidden');
                     $('#canvasMap').addClass('mapGame');
                     const tileMap = refreshCanvas(
-                        -1, $('sizeMap').val() * 2, $('sizeMap').val(), false,
+                        -1, false, true,
                     );
                     new Game(tileMap);
                     $('#newGame').remove();

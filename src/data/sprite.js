@@ -45,8 +45,8 @@ export const MAP = {
 
   listTilesLayerObstacles: {
     3: 'treestump',
-    6: 'rock3',
-    7: 'rock4',
+    4: 'rock1',
+    5: 'rock2',
     8: 'cactus1',
     9: 'cactus2',
     10: 'cactus3',

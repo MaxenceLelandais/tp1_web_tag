@@ -6,20 +6,29 @@ import Map from './map.js';
  */
 export default class TileMap {
   /**
-     * Le constructeur garde en mémoire les données de base
-     * pour le canvas et la map.
-     * Puis, il crée une map.
-     * @param {*} tileAtlas
-     * @param {*} tileSize
-     * @param {*} width
-     * @param {*} height
-     */
-  constructor(tileAtlas, tileSize, width, height) {
+   * Le constructeur garde en mémoire les données de base
+   * pour le canvas et la map.
+   * Puis, il crée une map.
+   * @param {*} ctx
+   * @param {*} tileAtlas
+   * @param {*} tileSize
+   * @param {*} width
+   * @param {*} height
+   * @param {*} animeGeneration
+   */
+  constructor(ctx, tileAtlas, tileSize, width, height, animeGeneration) {
     this.tileAtlas = tileAtlas;
     this.tileSize = tileSize;
     this.width = width;
     this.height = height;
-    this.map = new Map(this.width, this.height);
+    this.map = new Map(
+        this.width,
+        this.height,
+        ctx,
+        tileAtlas,
+        tileSize,
+        animeGeneration,
+    );
   }
 
   /**
