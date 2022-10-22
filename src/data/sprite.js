@@ -1,5 +1,5 @@
 export const MAP = {
-  src: './assets/tiles2.png',
+  src: './assets/tiles.png',
   tileSize: 64,
   drawSize: 64,
 
@@ -40,7 +40,7 @@ export const MAP = {
     'cactus1': 8,
     'cactus2': 9,
     'cactus3': 10,
-    'void': 11,
+    'void': -1,
   },
 
   listTilesLayerObstacles: {
