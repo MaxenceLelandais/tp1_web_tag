@@ -1,7 +1,8 @@
-import { restoreScore } from "../model/score.js";
+import $ from 'jquery';
+import {restoreScore} from '../model/score.js';
 
 export function Leaderboard() {
-    const leaderboard = $(`
+  const leaderboard = $(`
         <div class="wrapper">
             <div class="leaderboardSection">
                 <div class="leaderboardtabs">
@@ -20,7 +21,7 @@ export function Leaderboard() {
     `);
 
     leaderboard.append(restoreScore);
-    //leaderboard.push(restoreScore);
 
-    return leaderboard;
+  return leaderboard;
 }
+

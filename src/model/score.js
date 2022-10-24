@@ -2,24 +2,24 @@ const noJoueur = 'noJoueur';
 let listeJoueur = [];
 
 export function enregistrerScore(nomJoueur, classeJoueur, mapChoisie, score) {
-    let compteur = 0;
-    const index = [];
+  let compteur = 0;
+  const index = [];
 
-    listeJoueur.forEach( (joueur) => {
-        if( parseInt(joueur.split('-')[3] <= score)) {
-            index.push(compteur);
-        }
-        compteur++;
-    });
-
-    if(index != null) {
-        listeJoueur = listeJoueur.insert(index[0], nomJoueur + '-' + classeJoueur 
-            + '-' +  mapChoisie + '-' + score);
+  listeJoueur.forEach( (joueur) => {
+    if ( parseInt(joueur.split('-')[3] <= score)) {
+      index.push(compteur);
     }
+    compteur++;
+  });
 
-    listeJoueur.slice(0, 9);
+  if (index != null) {
+    listeJoueur = listeJoueur.insert(index[0], nomJoueur + '-' + classeJoueur +
+            '-' + mapChoisie + '-' + score);
+  }
 
-    localStorage.setItem(noJoueur, JSON.stringify(listeJoueur.splice(0, 10)));
+  listeJoueur.slice(0, 9);
+
+  localStorage.setItem(noJoueur, JSON.stringify(listeJoueur.splice(0, 10)));
 }
 
 export function restoreScore() {
@@ -29,12 +29,12 @@ export function restoreScore() {
     if(retrievedScore !== null) {
         listeJoueur = retrievedScore.split(',');
 
-        listeJoueur.forEach( (element) => {
-            array.push(element);
-        });
+    listeJoueur.forEach( (element) => {
+      array.push(element);
+    });
 
-        listeJoueur = array.splice(0, 10);
-    }
+    listeJoueur = array.splice(0, 10);
+  }
 
-    return listeJoueur;
+  return listeJoueur;
 }
