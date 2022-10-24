@@ -27,7 +27,6 @@ export function restoreScore() {
     const array = [];
     
     if(retrievedScore !== null) {
-        //const score = JSON.parse(retrievedScore);
         listeJoueur = retrievedScore.split(',');
 
         listeJoueur.forEach( (element) => {

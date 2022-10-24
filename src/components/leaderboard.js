@@ -7,33 +7,20 @@ export function Leaderboard() {
                 <div class="leaderboardtabs">
                     <div class="leaderboard">
                         <ul>
-                            <li class="active">Score</li>
-                            <li>Classe</li>
-                            <li>Map</li>
+                            <li class="active" data-li="score">Score</li>
+                            <li data-li="classePerso">Classe</li>
+                            <li data-li="map">Map</li>
                         </ul>
                     </div>
                 </div>
+                <button type="button" class="bouton"> Démarrer la partie</button>
             </div>
+            
         </div>
     `);
 
     leaderboard.append(restoreScore);
+    //leaderboard.push(restoreScore);
 
     return leaderboard;
 }
-
-/*
-    <div class="wrapper">
-        <div class="leaderboardSection">
-            <div class="leaderboardtabs">
-                <div class="leaderboard">
-                    <ul>
-                        <li class="active">Score</li>
-                        <li>Classe</li>
-                        <li>Map</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-*/
