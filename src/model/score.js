@@ -1,6 +1,13 @@
 const noJoueur = 'noJoueur';
 let listeJoueur = [];
 
+/**
+ * Fonction pour enregistrer sur le localStorage.
+ * @param {*} nomJoueur le nom du joueur.
+ * @param {*} classeJoueur la classe du personnage choisi.
+ * @param {*} mapChoisie la map sur laquelle les joueur ont joués.
+ * @param {*} score le score à la fin de la partie.
+ */
 export function enregistrerScore(nomJoueur, classeJoueur, mapChoisie, score) {
   let compteur = 0;
   const index = [];
@@ -22,12 +29,16 @@ export function enregistrerScore(nomJoueur, classeJoueur, mapChoisie, score) {
   localStorage.setItem(noJoueur, JSON.stringify(listeJoueur.splice(0, 10)));
 }
 
+/**
+ * Fonction pour retourner le localStorage.
+ * @return {object} le localStorage.
+ */
 export function restoreScore() {
-    const retrievedScore = localStorage.getItem(noJoueur);
-    const array = [];
-    
-    if(retrievedScore !== null) {
-        listeJoueur = retrievedScore.split(',');
+  const retrievedScore = localStorage.getItem(noJoueur);
+  const array = [];
+
+  if (retrievedScore !== null) {
+    listeJoueur = retrievedScore.split(',');
 
     listeJoueur.forEach( (element) => {
       array.push(element);

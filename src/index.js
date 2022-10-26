@@ -1,8 +1,5 @@
 import $ from 'jquery';
-import {pageNewGame} from './components/pageNewGame.js';
 
-import {Leaderboard} from './components/leaderboard.js';
+import {tableauMeilleurScore} from '../components/leaderboard.js';
 
-
-// $('body').append(Leaderboard()); // avec le score
-$('body').append(pageNewGame());
+$('body').append(tableauMeilleurScore()); // avec le score

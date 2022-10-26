@@ -1,27 +1,30 @@
 import $ from 'jquery';
 import {restoreScore} from '../model/score.js';
+import {pageNewGame} from '../components/pageNewGame.js';
 
-export function Leaderboard() {
-  const leaderboard = $(`
-        <div class="wrapper">
-            <div class="leaderboardSection">
-                <div class="leaderboardtabs">
-                    <div class="leaderboard">
-                        <ul>
-                            <li class="active" data-li="score">Score</li>
-                            <li data-li="classePerso">Classe</li>
-                            <li data-li="map">Map</li>
-                        </ul>
-                    </div>
-                </div>
-                <button type="button" class="bouton"> Démarrer la partie</button>
-            </div>
-            
-        </div>
-    `);
+/**
+ * Fonction pour obtenir le leaderboard avec les meilleurs scores.
+ * @return {object} le leaderboard.
+ */
+export function tableauMeilleurScore() {
+  const board =$('<div class="wrapper"></div>')
+      .append($('<div class="leaderboardSection"></div>')
+          .append($(`<div class="leaderboard">
+                      <ul>
+                          <li id="score">Score</li>
+                          <li id="classePerso">Classe</li>
+                          <li id="map">Map</li>
+                      </ul>
+                  </div>`))
+          .append(restoreScore))
+      .append($('<div class="boutonPartie"></div>')
+          .append($(`<button id="newGame" type="button" class="btn btn-primary">
+                      Démarrer la partie
+                  </button>`).on('click', () => {
+            $('body').append(pageNewGame());
+            $('.wrapper').remove();
+          })));
 
-    leaderboard.append(restoreScore);
-
-  return leaderboard;
+  return board;
 }
 
