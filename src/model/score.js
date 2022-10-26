@@ -4,8 +4,6 @@
  * @param {*} score le score à la fin de la partie.
  */
 export function enregistrerScore(nomJoueur, score) {
-  // let compteur = 0;
-  // const index = [];
   const defaultScore = {
     scores: [
       {
@@ -18,6 +16,13 @@ export function enregistrerScore(nomJoueur, score) {
   JSON.parse(localStorage.getItem('listeJoueur')) : defaultScore;
 
   res.scores.push({name: nomJoueur, score: score});
+
+  // scores.sort();
+  // sort par score le plus grand
+  // trim si plus grand que 10
+  if (scores.Length >= 10) {
+    scores[scores.Length].remove();
+  }
 
   localStorage.setItem('listeJoueur', JSON.stringify(res));
 }
