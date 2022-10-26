@@ -17,7 +17,7 @@ export function enregistrerScore(nomJoueur, score) {
 
   res.scores.push({name: nomJoueur, score: score});
 
-  scores.sort();
+  // scores.sort();
   // sort par score le plus grand
   // trim si plus grand que 10
   if (scores.Length >= 10) {

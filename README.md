@@ -21,7 +21,7 @@ BrunuhVille - Pirate Fantasy Music Rising Sun
 Assassin's creed IV Black Flag - Take What Is Ours / Track 14 by Brian Tyler, Olivier Derivière
 Adrian Von Ziegler - Arabian Fantasy Music Hual Hadi
 Ihsan Dincer - Warriors of the Sand - Middle Eastern War Music
-Peter Crowley's Fantasy Dream - (Celtic Fantasy Music) - The Winter Wolf
-Peter Crowley's Fantasy Dream - (Epic Trailer Battle Music) - The Last Hero
 Two Steps From Hell - Victory
 Howard Shore - Khazad-dûm
+Peter Crowley's Fantasy Dream - (Celtic Fantasy Music) - The Winter Wolf
+Peter Crowley's Fantasy Dream - (Epic Trailer Battle Music) - The Last Hero
