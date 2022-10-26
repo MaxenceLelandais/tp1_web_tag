@@ -76,7 +76,7 @@ export default class Map {
   animeMap(x, y, initial) {
     if (this.animeGeneration) {
       setTimeout(() => {
-        this.ctx.drawImage(
+        window.requestAnimationFrame(() => this.ctx.drawImage(
             this.tileAtlas,
             MAP.tileSize * initial,
             0,
@@ -86,6 +86,7 @@ export default class Map {
             y * this.tileSize,
             this.tileSize,
             this.tileSize,
+        ),
         );
       }, 0);
     }

@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import {PLAYER} from '../data/sprite.js';
 import Character from './character.js';
 
 
@@ -37,7 +38,7 @@ export class Game {
     player1.setPlayerClass($('#player1Class').text());
     player2.setPlayerClass($('#player2Class').text());
 
-    $('body').append(this.showInformationsGame(player1Name, player2Name));
+    $('#map').append(this.showInformationsGame(player1Name, player2Name));
     $('#map').append(player1.setCanvas('randomPosition'));
     $('#map').append(player2.setCanvas('randomPosition'));
 
@@ -83,7 +84,7 @@ export class Game {
         )
         .append($('<label></label>')
             .attr('id', 'tempsPlayer1')
-            .text('60.00 s.'),
+            .text(PLAYER.timer+'.00 s.'),
         )
         .append($('<br>'))
         .append($('<label></label>')
@@ -91,8 +92,37 @@ export class Game {
         )
         .append($('<label></label>')
             .attr('id', 'tempsPlayer2')
-            .text('60.00 s.'),
+            .text(PLAYER.timer+'.00 s.'),
         );
+  }
+
+  /**
+   * Affiche le joueur gagnant et son score.
+   * @param {*} playerName
+   * @param {*} score
+   * @return {Object}
+   */
+  showWin(playerName, score) {
+    return $('<div></div>')
+        .addClass('conclusionGame')
+        .css('text-align', 'center')
+        .append($('<label></label>')
+            .text('WIN de ' + playerName + ' !!!!!!'),
+        )
+        .append('<br>')
+        .append($('<label></label>')
+            .text('Avec un super score de ' + score + ' points.'),
+        )
+        .append('<br>')
+        .append($('<button></button>')
+            .addClass('btn btn-success')
+            .text('Go leaderboard')
+            .on('click', ()=>{
+              console.log('new game (retour leaderbord)');
+              $('#map').remove();
+            }),
+        )
+    ;
   }
 
   /**
@@ -114,8 +144,13 @@ export class Game {
 
     if (this.touche) {
       this.delay -= 100;
-      $('#tempsPlayer' + ((this.player + 2) % 3)).css('color', 'black');
-      $('#tempsPlayer' + (this.player + 1)).css('color', 'red');
+      if (this.player===1) {
+        $('#tempsPlayer1').css('color', 'black');
+        $('#tempsPlayer2').css('color', 'red');
+      } else {
+        $('#tempsPlayer1').css('color', 'red');
+        $('#tempsPlayer2').css('color', 'black');
+      }
       if (this.delay <= 0) {
         this.listeJoueur[this.player].unFreez();
         this.listeJoueur[(this.player + 1) % 2].vulnerabilite();
@@ -123,8 +158,30 @@ export class Game {
       }
     }
 
-    setTimeout(() => {
-      window.requestAnimationFrame(() => this.timer(this.player));
-    }, 100);
+    if ($('#tempsPlayer' + (this.player + 1)).text().split(' ')[0]*100 <=0) {
+      if (this.player===0) {
+        $('#map')
+            .append(
+                this.showWin(
+                    this.listeJoueur[1].player,
+                    $('#tempsPlayer2').text().split(' ')[0]*100,
+                ),
+            );
+      } else {
+        $('#map')
+            .append(
+                this.showWin(
+                    this.listeJoueur[0].player,
+                    $('#tempsPlayer1').text().split(' ')[0]*100,
+                ),
+            );
+      }
+      this.listeJoueur[0].animation = false;
+      this.listeJoueur[1].animation = false;
+    } else {
+      setTimeout(() => {
+        window.requestAnimationFrame(() => this.timer(this.player));
+      }, 100);
+    }
   }
 }

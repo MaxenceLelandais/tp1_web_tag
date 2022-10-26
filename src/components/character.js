@@ -20,6 +20,7 @@ export default class Character {
   player2 = 0;
   vul = true;
   bomber = false;
+  animation = true;
 
   /**
    * Initialise le joueur (taille et classe) et
@@ -165,9 +166,11 @@ export default class Character {
     this.move();
     this.render(ctx);
 
-    setTimeout(() => {
-      window.requestAnimationFrame(() => this.loop(ctx));
-    }, 50);
+    if (this.animation) {
+      setTimeout(() => {
+        window.requestAnimationFrame(() => this.loop(ctx));
+      }, 50);
+    }
   }
 
   /**

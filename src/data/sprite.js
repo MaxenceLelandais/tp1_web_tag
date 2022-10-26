@@ -110,7 +110,7 @@ export const PLAYER = {
   width: 32,
   height: 36,
   initSpeed: 11,
-  timer: 60,
+  timer: 10,
   listClass: {
     'src': './assets/playerClass/',
     'type': '.png',
