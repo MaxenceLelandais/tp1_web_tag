@@ -32,10 +32,11 @@ export function pageNewGame() {
                           .on('input', function() {
                             $('#size').text(
                                 $(this).val() * 2 +
-                  ' x ' +
-                  $(this).val() +
-                  ' tiles',
+                                ' x ' +
+                                $(this).val() +
+                                ' tiles',
                             );
+                            $('#validate').hide();
                           })
                           .ready(function() {
                             $('#size').text(50 * 2 + ' x ' + 50 + ' tiles');
