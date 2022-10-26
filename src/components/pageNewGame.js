@@ -12,13 +12,13 @@ import {Game} from './game.js';
  */
 export function pageNewGame() {
   return $('<div></div>')
-      .css('text-align', 'center')
+      .addClass('containerMaster')
       .append($('<div></div>')
           .addClass('container')
           .attr('id', 'newGame')
           .append($('<div></div>')
-              .append(initPlayer('player1', 'player2'))
-              .append(initPlayer('player2', 'player1')),
+              .append(initPlayer('player1', 'player2', 1))
+              .append(initPlayer('player2', 'player1', 2)),
           )
           .append(
               $('<div></div>')
@@ -75,6 +75,7 @@ export function pageNewGame() {
                         -1, false, true,
                     );
                     new Game(tileMap);
+
                     $('#newGame').remove();
                   }),
           ),
@@ -86,10 +87,11 @@ export function pageNewGame() {
  * Créer l'affichage des données du joueur (nom, classe, visuel du joueur).
  * @param {*} idPlayer1
  * @param {*} idPlayer2
+ * @param {*} id
  * @return {Object}
  */
-function initPlayer(idPlayer1, idPlayer2) {
-  const character = new Character(idPlayer1);
+function initPlayer(idPlayer1, idPlayer2, id) {
+  const character = new Character(idPlayer1, id);
   character.sizeMulti = 2;
   return $('<div></div>')
       .addClass('player')

@@ -2,7 +2,7 @@ import $ from 'jquery';
 import {PLAYER} from '../data/sprite.js';
 import {enregistrerScore} from '../model/score.js';
 import Character from './character.js';
-import {tableauMeilleurScore} from './leaderboard.js';
+import {fillScore, startButton, tableauMeilleurScore} from './leaderboard.js';
 
 
 /**
@@ -31,8 +31,8 @@ export class Game {
     const player2Name = $('#player2Nom').val() != '' ?
       $('#player2Nom').val() : 'Player2';
 
-    const player1 = new Character(player1Name);
-    const player2 = new Character(player2Name);
+    const player1 = new Character(player1Name, 1);
+    const player2 = new Character(player2Name, 2);
 
     this.listeJoueur = [player1, player2];
     this.touche = false;
@@ -120,9 +120,12 @@ export class Game {
             .addClass('btn btn-success')
             .text('Go leaderboard')
             .on('click', ()=>{
-              enregistrerScore(playerName, score);
+              $('.containerMaster').remove();
               $('#map').remove();
-              $('body').append(tableauMeilleurScore());
+              enregistrerScore(playerName, score);
+              $('body').append(tableauMeilleurScore()); // avec le score
+              $('#boutonPartie').append(startButton());
+              fillScore();
             }),
         )
     ;

@@ -21,18 +21,21 @@ export default class Character {
   vul = true;
   bomber = false;
   animation = true;
+  dontMove = false;
 
   /**
    * Initialise le joueur (taille et classe) et
    * ajoute une surveillance des touches du clavier.
    * @param {*} player
+   * @param {*} nbr
    */
-  constructor(player) {
+  constructor(player, nbr) {
+    this.idPlayer = 'player'+nbr;
     this.player = player;
     this.stage.width = PLAYER.width;
     this.stage.height = PLAYER.height;
     this.setPlayerClass('default');
-    this.dontMove = false;
+
     $('body').on('keydown', (event) => {
       this.keysDown[event.key] = true;
     });
@@ -104,7 +107,6 @@ export default class Character {
     this.diffWidth = ($('#canvasMap').attr('width') - window.innerWidth) / 2;
     this.diffHeight = ($('#canvasMap').attr('height') - window.innerHeight) / 2;
     return $('<canvas></canvas>')
-
         .attr('id', this.player + 'Canvas')
         .attr('width', this.stage.width * 2)
         .attr('height', this.stage.height * 2)
@@ -114,15 +116,13 @@ export default class Character {
             let x = 0;
             let y = 0;
             do {
-              x = Math.ceil(
-                  this.diffWidth +
-              Math.random() * window.innerWidth -
-              this.stage.width * this.sizeMulti,
+              x = this.diffWidth + this.sizeMulti*2 + Math.ceil(
+                  Math.random() * window.innerWidth -
+              this.stage.width * this.sizeMulti * 3,
               );
-              y = Math.ceil(
-                  this.diffHeight +
-              Math.random() * window.innerHeight -
-              this.stage.height * this.sizeMulti * 2,
+              y = this.diffHeight + this.sizeMulti*2+ Math.ceil(
+                  Math.random() * window.innerHeight -
+              this.stage.height * this.sizeMulti / 2,
               );
             } while (checkSpawn(this.map, x, y, this.tileSize));
 
@@ -157,16 +157,17 @@ export default class Character {
    * @param {*} ctx
    */
   loop(ctx) {
-    ctx.clearRect(
-        this.positionX,
-        this.positionY,
-        this.positionX + (this.stage.width * this.sizeMulti),
-        this.positionY + (this.stage.height * this.sizeMulti),
-    );
-    this.move();
-    this.render(ctx);
-
     if (this.animation) {
+      ctx.clearRect(
+          this.positionX,
+          this.positionY,
+          this.positionX + (this.stage.width * this.sizeMulti),
+          this.positionY + (this.stage.height * this.sizeMulti),
+      );
+      this.move();
+      this.render(ctx);
+
+
       setTimeout(() => {
         window.requestAnimationFrame(() => this.loop(ctx));
       }, 50);
@@ -207,9 +208,9 @@ export default class Character {
    * des obstacles sur la map.
    */
   move() {
-    Object.keys(PLAYER[this.player].commands).forEach((command) => {
+    Object.keys(PLAYER[this.idPlayer].commands).forEach((command) => {
       if (this.keysDown[command] && !this.dontMove) {
-        const dataMove = PLAYER[this.player].commands[command];
+        const dataMove = PLAYER[this.idPlayer].commands[command];
         this.sourceY = dataMove[0];
         this.sourceX = (this.sourceX + 1) % 3;
         if (this.map != undefined) {

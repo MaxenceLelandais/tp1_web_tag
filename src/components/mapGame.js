@@ -36,8 +36,6 @@ export function refreshCanvas(maxSize, change, mode) {
     size = 1;
   }
 
-  const a = new Date();
-
   $('#canvasMap').attr('height', height * size).attr('width', width * size);
   if (change) {
     scene.tileMap = new TileMap(
@@ -54,10 +52,6 @@ export function refreshCanvas(maxSize, change, mode) {
   if (!animeGeneration || mode) {
     render();
   }
-
-
-  const b = new Date();
-  console.log('temps : ', b-a);
 
   return scene.tileMap;
 }

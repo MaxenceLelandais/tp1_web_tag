@@ -15,11 +15,9 @@ export function enregistrerScore(nomJoueur, score) {
     ],
   };
   const res = localStorage.getItem('listeJoueur') !==null ?
-  localStorage.getItem('listeJoueur') : defaultScore;
+  JSON.parse(localStorage.getItem('listeJoueur')) : defaultScore;
 
   res.scores.push({name: nomJoueur, score: score});
-  // sort par score le plus grand
-  // trim si plus grand que 10
 
   localStorage.setItem('listeJoueur', JSON.stringify(res));
 }

@@ -16,9 +16,9 @@ export function tableauMeilleurScore() {
                     <li id="score">Score</li>
                 </ul>
             </div>
-            <div id="boutonPartie">
+        </div>
+        <div id="boutonPartie">
             
-            </div>
         </div>
     </div>`);
 
@@ -49,12 +49,15 @@ export function startButton() {
 export function fillScore() {
   const listeJoueur = restoreScore();
   listeJoueur.scores.forEach((data)=> {
-    const score = $(`
-        <ul>
-            <li>${data.name}</li>
-            <li>${data.score}</li>
-        </ul>
-    `);
-    $('#leaderboard').append(score);
-  });
+    if (data.name!='') {
+      const score = $(`
+      <ul>
+          <li>${data.name}</li>
+          <li>${data.score}</li>
+      </ul>
+      `);
+      $('#leaderboard').append(score);
+    }
+  },
+  );
 }
