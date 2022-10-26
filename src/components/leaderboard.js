@@ -7,24 +7,54 @@ import {pageNewGame} from '../components/pageNewGame.js';
  * @return {object} le leaderboard.
  */
 export function tableauMeilleurScore() {
-  const board =$('<div class="wrapper"></div>')
-      .append($('<div class="leaderboardSection"></div>')
-          .append($(`<div class="leaderboard">
-                      <ul>
-                          <li id="score">Score</li>
-                          <li id="classePerso">Classe</li>
-                          <li id="map">Map</li>
-                      </ul>
-                  </div>`))
-          .append(restoreScore))
-      .append($('<div class="boutonPartie"></div>')
-          .append($(`<button id="newGame" type="button" class="btn btn-primary">
-                      Démarrer la partie
-                  </button>`).on('click', () => {
-            $('body').append(pageNewGame());
-            $('.wrapper').remove();
-          })));
+  const board = $(`
+    <div class="wrapper">
+        <div class="leaderboardSection">
+            <div id="leaderboard">
+                <ul>
+                    <li id="nom">Nom</li>
+                    <li id="score">Score</li>
+                </ul>
+            </div>
+            <div id="boutonPartie">
+            
+            </div>
+        </div>
+    </div>`);
 
   return board;
 }
 
+/**
+ * Fonction pour gérer le bouton pour démarrer une nouvelle partie.
+ * @return {*}
+ */
+export function startButton() {
+  const startBtn = $(`
+    <button id="newGame" type="button" class="btn btn-primary">
+        Démarrer la partie
+    </button>
+    `);
+  startBtn.on('click', () => {
+    $('body').append(pageNewGame());
+    $('.wrapper').remove();
+  });
+  return startBtn;
+}
+
+/**
+ * Fonction pour remplir le leaderboard.
+ * @param {*} listeJoueur
+ */
+export function fillScore() {
+  const listeJoueur = restoreScore();
+  listeJoueur.scores.forEach((data)=> {
+    const score = $(`
+        <ul>
+            <li>${data.name}</li>
+            <li>${data.score}</li>
+        </ul>
+    `);
+    $('#leaderboard').append(score);
+  });
+}

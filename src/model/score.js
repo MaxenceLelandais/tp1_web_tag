@@ -1,32 +1,27 @@
-const noJoueur = 'noJoueur';
-let listeJoueur = [];
-
 /**
  * Fonction pour enregistrer sur le localStorage.
  * @param {*} nomJoueur le nom du joueur.
- * @param {*} classeJoueur la classe du personnage choisi.
- * @param {*} mapChoisie la map sur laquelle les joueur ont joués.
  * @param {*} score le score à la fin de la partie.
  */
-export function enregistrerScore(nomJoueur, classeJoueur, mapChoisie, score) {
-  let compteur = 0;
-  const index = [];
+export function enregistrerScore(nomJoueur, score) {
+  // let compteur = 0;
+  // const index = [];
+  const defaultScore = {
+    scores: [
+      {
+        name: '',
+        score: 0,
+      },
+    ],
+  };
+  const res = localStorage.getItem('listeJoueur') !==null ?
+  localStorage.getItem('listeJoueur') : defaultScore;
 
-  listeJoueur.forEach( (joueur) => {
-    if ( parseInt(joueur.split('-')[3] <= score)) {
-      index.push(compteur);
-    }
-    compteur++;
-  });
+  res.scores.push({name: nomJoueur, score: score});
+  // sort par score le plus grand
+  // trim si plus grand que 10
 
-  if (index != null) {
-    listeJoueur = listeJoueur.insert(index[0], nomJoueur + '-' + classeJoueur +
-            '-' + mapChoisie + '-' + score);
-  }
-
-  listeJoueur.slice(0, 9);
-
-  localStorage.setItem(noJoueur, JSON.stringify(listeJoueur.splice(0, 10)));
+  localStorage.setItem('listeJoueur', JSON.stringify(res));
 }
 
 /**
@@ -34,18 +29,16 @@ export function enregistrerScore(nomJoueur, classeJoueur, mapChoisie, score) {
  * @return {object} le localStorage.
  */
 export function restoreScore() {
-  const retrievedScore = localStorage.getItem(noJoueur);
-  const array = [];
+  const defaultScore = {
+    scores: [
+      {
+        name: '',
+        score: 0,
+      },
+    ],
+  };
+  const scores = localStorage.getItem('listeJoueur') !==null ?
+  JSON.parse(localStorage.getItem('listeJoueur')) : defaultScore;
 
-  if (retrievedScore !== null) {
-    listeJoueur = retrievedScore.split(',');
-
-    listeJoueur.forEach( (element) => {
-      array.push(element);
-    });
-
-    listeJoueur = array.splice(0, 10);
-  }
-
-  return listeJoueur;
+  return scores;
 }

@@ -110,7 +110,7 @@ export const PLAYER = {
   width: 32,
   height: 36,
   initSpeed: 11,
-  timer: 60,
+  timer: 1,
   listClass: {
     'src': './assets/playerClass/',
     'type': '.png',
@@ -161,9 +161,9 @@ export const PLAYER = {
 
   player2: {
     commands: {
-      'q': [3, [-1, 0]],
+      'a': [3, [-1, 0]],
       'd': [1, [1, 0]],
-      'z': [0, [0, -1]],
+      'w': [0, [0, -1]],
       's': [2, [0, 1]],
     },
   },

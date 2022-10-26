@@ -1,5 +1,7 @@
 import $ from 'jquery';
-
-import {tableauMeilleurScore} from '../components/leaderboard.js';
+import {fillScore, startButton, tableauMeilleurScore}
+  from '../src/components/leaderboard.js';
 
 $('body').append(tableauMeilleurScore()); // avec le score
+$('#boutonPartie').append(startButton());
+fillScore();
