@@ -170,9 +170,8 @@ export default class Map {
    * Cela permet de minimiser la linéarité du lissage.
    * Le lissage permet d'optenir une suite de tuiles qui se suivent.
    * @param {*} background
-   * @param {*} modeRandom
    */
-  filtrage(background, modeRandom) {
+  filtrage(background) {
     for (let y = 0; y < this.height; y++) {
       for (let x = 0; x < this.width; x++) {
         const liste = [
@@ -194,7 +193,7 @@ export default class Map {
                 background[y + dy][x + dx] === MAP.defaultBackground
               )
             ) {
-              this.typeFiltre(x, y, dx, dy, background, modeRandom);
+              this.typeFiltre(x, y, dx, dy, background);
             }
           }
         });
@@ -209,22 +208,20 @@ export default class Map {
    * @param {*} dx
    * @param {*} dy
    * @param {*} background
-   * @param {*} modeRandom
    */
-  typeFiltre(x, y, dx, dy, background, modeRandom) {
+  typeFiltre(x, y, dx, dy, background) {
     const value = Math.abs(background[y + dy][x + dx]);
     const value2 = Math.abs(background[y][x]);
     let ajout = 1;
-    if (modeRandom) {
-      if (
-        Math.abs(value - value2) > 1 &&
+    if (
+      Math.abs(value - value2) > 1 &&
             Math.random() > MAP.randomFiltreLissage &&
             value2 + 2 < 13 &&
             value2 - 2 >= 0
-      ) {
-        ajout = 2;
-      }
+    ) {
+      ajout = 2;
     }
+
 
     if (value - value2 > 0) {
       background[y + dy][x + dx] = value2 + ajout;
@@ -267,8 +264,7 @@ export default class Map {
           0,
       );
     }
-    this.filtrage(background, true);
-    this.filtrage(background, false);
+    this.filtrage(background);
     return background;
   }
 
