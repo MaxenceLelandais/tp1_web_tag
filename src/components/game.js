@@ -120,6 +120,7 @@ export class Game {
             .addClass('btn btn-success')
             .text('Go leaderboard')
             .on('click', ()=>{
+              $('body').css('overflow', '');
               $('.containerMaster').remove();
               $('#map').remove();
               enregistrerScore(playerName, score);

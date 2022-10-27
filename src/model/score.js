@@ -15,16 +15,20 @@ export function enregistrerScore(nomJoueur, score) {
   const res = localStorage.getItem('listeJoueur') !==null ?
   JSON.parse(localStorage.getItem('listeJoueur')) : defaultScore;
 
-  res.scores.push({name: nomJoueur, score: score});
-
-  res.scores.sort(function(a, b) {
-    return a - b;
-  });
-
-  if (res.scores.Length >= 10) {
-    res.scores[res.scores.Length].remove();
+  let emplacement = 0;
+  for (emplacement in res.scores) {
+    if (res.scores[emplacement].score<=score) {
+      break;
+    }
   }
 
+  for (let post=res.scores.length; post>=emplacement; post--) {
+    res.scores[post] = res.scores[post-1];
+  }
+  res.scores[emplacement] = {name: nomJoueur, score: score};
+  if (res.scores.length >= 10) {
+    res.scores[res.scores.Length].remove();
+  }
   localStorage.setItem('listeJoueur', JSON.stringify(res));
 }
 
