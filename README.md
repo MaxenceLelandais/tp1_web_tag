@@ -14,11 +14,10 @@ https://www.pikpng.com/transpng/JxJmRT/
 La musique pour le jeu est la propriété intellectuelle de plusieurs compositeurs/interprètes/artistes musicaux qui sont Howard Shore, Adrian Von Ziegler, Two Steps From Hell, Ihsan Dincer, Brunuhville, Henrik Airaksinen, Brian Tyler, Olivier Derivière et de Peter Crowley
 
 List of soundtrack
-
+BrunuhVille - Pirate Fantasy Music Rising Sun
+Assassin's creed IV Black Flag - Take What Is Ours by Brian Tyler, Olivier Derivière
 Adrian Von Ziegler - Celtic Music Sylvani
 Peter Crowley's Fantasy Dream - (Epic Action Music) Hunt or be hunted
-BrunuhVille - Pirate Fantasy Music Rising Sun
-Assassin's creed IV Black Flag - Take What Is Ours / Track 14 by Brian Tyler, Olivier Derivière
 Adrian Von Ziegler - Arabian Fantasy Music Hual Hadi
 Ihsan Dincer - Warriors of the Sand - Middle Eastern War Music
 Two Steps From Hell - Victory
