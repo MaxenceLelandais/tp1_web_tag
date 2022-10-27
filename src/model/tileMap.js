@@ -41,7 +41,7 @@ export default class TileMap {
   render(ctx, layer) {
     for (let y = 0; y < this.height; y++) {
       for (let x = 0; x < this.width; x++) {
-        const a = this.map[layer][y][x];
+        const a = this.map.mapping[layer][y][x];
         if (a != -1 && a != 0) {
           ctx.drawImage(
               this.tileAtlas,

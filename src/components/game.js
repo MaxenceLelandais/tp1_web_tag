@@ -11,6 +11,7 @@ import {fillScore, startButton, tableauMeilleurScore} from './leaderboard.js';
  * Elle s'occupe aussi du décompte et gère la victoire.
  */
 export class Game {
+  change = 0;
   /**
     * Initialise le jeu.
     * @param {*} tileMap
@@ -18,6 +19,13 @@ export class Game {
   constructor(tileMap) {
     this.tileMap = tileMap;
     this.player = parseInt(Math.ceil(Math.random() - 0.5));
+
+    this.audio = new Audio(
+        './assets/soundtrack/'+
+    this.tileMap.map.valueMusic+
+    'base.mp3',
+    );
+    this.audio.play();
     this.initialization();
   }
 
@@ -44,13 +52,14 @@ export class Game {
     $('#map').append(player1.setCanvas('randomPosition'));
     $('#map').append(player2.setCanvas('randomPosition'));
 
-    player1.setData(this.tileMap.map, this.tileMap.tileSize);
-    player2.setData(this.tileMap.map, this.tileMap.tileSize);
+    player1.setData(this.tileMap.map.mapping, this.tileMap.tileSize);
+    player2.setData(this.tileMap.map.mapping, this.tileMap.tileSize);
     player1.setTracker(this, player2);
     player2.setTracker(this, player1);
 
     this.listeJoueur[this.player].bomber = true;
     $('#tempsPlayer' + (this.player + 1)).css('color', 'red');
+
     this.timer();
   }
 
@@ -69,6 +78,18 @@ export class Game {
     this.listeJoueur[(this.player + 1) % 2].invulnerabilite();
     this.listeJoueur[this.player].bomber = true;
     this.listeJoueur[(this.player + 1) % 2].bomber = false;
+    console.log('o');
+
+    if (this.change === 0) {
+      this.audio.pause();
+      this.audio = new Audio(
+          './assets/soundtrack/'+
+        this.tileMap.map.valueMusic+
+        'fight.mp3',
+      );
+      this.audio.play();
+      this.change = 1;
+    }
   }
 
   /**
@@ -105,6 +126,7 @@ export class Game {
    * @return {Object}
    */
   showWin(playerName, score) {
+    this.audio.pause();
     return $('<div></div>')
         .addClass('conclusionGame')
         .css('text-align', 'center')

@@ -62,11 +62,19 @@ export const MAP = {
   },
 
   typeTiles: {
-    water: ['deepwater', 'midlewater', 'water'],
-    grass: ['grass', 'tree'],
-    sand: ['watersand', 'sand', 'grasssand'],
-    dirt: ['dirt', 'blackdirt'],
-    stone: ['stone', 'stonesnow', 'snow'],
+    1: 'water',
+    2: 'water',
+    3: 'water',
+    4: 'sand',
+    5: 'sand',
+    6: 'sand',
+    7: 'grass',
+    8: 'grass',
+    9: 'dirt',
+    10: 'dirt',
+    11: 'stone',
+    12: 'stone',
+    13: 'stone',
   },
 
   background: {

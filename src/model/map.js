@@ -5,6 +5,9 @@ import {MAP} from '../data/sprite.js';
  * contenant les numéros des tuiles.
  */
 export default class Map {
+  dicoFrequence = {'water': 0, 'sand': 0, 'grass': 0, 'dirt': 0, 'stone': 0};
+  valueMusic = '';
+
   /**
    * Initialise la liste des layers et créer leur matrice.
    * @param {*} width
@@ -13,7 +16,6 @@ export default class Map {
    * @param {*} tileAtlas
    * @param {*} tileSize
    * @param {*} animeGeneration
-   * @return {Object}
    */
   constructor(width, height, ctx, tileAtlas, tileSize, animeGeneration) {
     this.width = width;
@@ -22,15 +24,13 @@ export default class Map {
     this.tileAtlas = tileAtlas;
     this.tileSize = tileSize;
     this.animeGeneration = animeGeneration;
-    const mapping = [];
+    this.mapping = [];
     const background = this.createBackground(MAP.startTile);
-    mapping.push(background);
+    this.mapping.push(background);
 
     Object.keys(MAP.layerList).forEach((layer) => {
-      mapping.push(this.createLayer(MAP.layerList[layer], background));
+      this.mapping.push(this.createLayer(MAP.layerList[layer], background));
     });
-
-    return mapping;
   }
 
   /**
@@ -265,6 +265,7 @@ export default class Map {
       );
     }
     this.filtrage(background);
+    this.getTypeMap(background);
     return background;
   }
 
@@ -302,5 +303,26 @@ export default class Map {
       layerMap.push(row);
     }
     return layerMap;
+  }
+
+  /**
+   *
+   * @param {*} background
+   */
+  getTypeMap(background) {
+    for (let y = 0; y < this.height; y++) {
+      for (let x = 0; x < this.width; x++) {
+        this.dicoFrequence[MAP.typeTiles[background[y][x]+1]] +=1;
+      }
+    }
+
+    let max = 0;
+
+    for (const type in this.dicoFrequence) {
+      if (max<this.dicoFrequence[type]) {
+        this.valueMusic = type;
+        max = this.dicoFrequence[type];
+      }
+    }
   }
 }
