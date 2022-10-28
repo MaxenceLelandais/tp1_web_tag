@@ -18,7 +18,6 @@ export function tableauMeilleurScore() {
             </div>
         </div>
         <div id="boutonPartie">
-            
         </div>
     </div>`);
 
@@ -37,7 +36,11 @@ export function startButton() {
     `);
   startBtn.on('click', () => {
     $('body').append(pageNewGame());
+    $('wrapper').fadeOut('slow', () => {/*
+          $('body').append(pageNewGame());
+          $('.wrapper').remove(); */});
     $('.wrapper').remove();
+    // $('wrapper').fadeOut(3000).remove();
   });
   return startBtn;
 }
@@ -58,6 +61,5 @@ export function fillScore() {
       `);
       $('#leaderboard').append(score);
     }
-  },
-  );
+  });
 }
