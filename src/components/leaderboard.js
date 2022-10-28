@@ -37,6 +37,8 @@ export function startButton() {
     `);
   startBtn.on('click', () => {
     $('body').append(pageNewGame());
+    $('wrapper').fadeOut('slow');
+    // $('wrapper').fadeOut(3000).remove();
     $('.wrapper').remove();
   });
   return startBtn;
