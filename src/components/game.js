@@ -82,11 +82,17 @@ export class Game {
 
     if (this.change === 0) {
       this.audio.pause();
-      this.audio = new Audio(
-          './assets/soundtrack/'+
+      if (Math.random()>0.9) {
+        this.audio = new Audio(
+            './assets/soundtrack/hummm.mp3',
+        );
+      } else {
+        this.audio = new Audio(
+            './assets/soundtrack/'+
         this.tileMap.map.valueMusic+
         'fight.mp3',
-      );
+        );
+      }
       this.audio.play();
       this.change = 1;
     }
