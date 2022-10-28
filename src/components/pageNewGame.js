@@ -11,7 +11,7 @@ import {Game} from './game.js';
  * @return {Object}
  */
 export function pageNewGame() {
-  return $('<div></div>')
+  return $('<div></div>') /* .fadeIn('slow') */
       .addClass('containerMaster')
       .text( `Joueur 1 : Utilise les flèches -
             Joueur 2 : Utilise les touches W A S D`,
