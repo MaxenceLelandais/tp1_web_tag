@@ -75,8 +75,6 @@ export function pageNewGame() {
                         -1, false, true,
                     );
                     new Game(tileMap);
-
-                    $('#newGame').remove();
                   }),
           ),
       )

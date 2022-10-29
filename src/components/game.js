@@ -26,6 +26,7 @@ export class Game {
     );
     this.audio.play();
     this.initialization();
+    $('.container').remove();
   }
 
   /**
