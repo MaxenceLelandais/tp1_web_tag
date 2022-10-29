@@ -13,9 +13,6 @@ import {Game} from './game.js';
 export function pageNewGame() {
   return $('<div></div>') /* .fadeIn('slow') */
       .addClass('containerMaster')
-      .text( `Joueur 1 : Utilise les flèches -
-            Joueur 2 : Utilise les touches W A S D`,
-      )
       .append($('<div></div>')
           .addClass('container')
           .attr('id', 'newGame')
@@ -96,11 +93,12 @@ export function pageNewGame() {
 function initPlayer(idPlayer1, idPlayer2, id) {
   const character = new Character(idPlayer1, id);
   character.sizeMulti = 2;
+
   return $('<div></div>')
       .addClass('player')
       .attr('id', idPlayer1)
-      .append($('<div></div>')
-
+      .append($('<div class="text-center"></div>')
+          .append(character.returnCommandList())
           .append(character.setCanvas())
           .append($('<div></div>')
               .addClass('input-group')

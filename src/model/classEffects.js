@@ -14,8 +14,8 @@ export function classEffects(
     effectList, map, x, y, sizeTiles, reverseDictListTiles,
 ) {
   const post = getCoordsInMap(x, y, sizeTiles);
-  const tileName = reverseDictListTiles[map[0][post[1]][post[0]]-1];
-  if (MAP.listTilesLayerObstacles[map[1][post[1]][post[0]]-1] != undefined) {
+  const tileName = reverseDictListTiles[map[0][post[1]][post[0]]];
+  if (MAP.listTilesLayerObstacles[map[1][post[1]][post[0]]] != undefined) {
     return 0;
   };
   return effectList[tileName] != undefined ?
@@ -43,5 +43,8 @@ export function checkSpawn(map, x, y, sizeTiles) {
  * @return {Object}
  */
 function getCoordsInMap(x, y, sizeTiles) {
-  return [Math.ceil((x / sizeTiles)), Math.ceil((y / sizeTiles))];
+  return [
+    Math.ceil(((x-sizeTiles/4) / sizeTiles)),
+    Math.ceil(((y-sizeTiles/4) / sizeTiles)),
+  ];
 }

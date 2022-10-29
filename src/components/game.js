@@ -2,7 +2,6 @@ import $ from 'jquery';
 import {PLAYER} from '../data/sprite.js';
 import {enregistrerScore} from '../model/score.js';
 import Character from './character.js';
-import {fillScore, startButton, tableauMeilleurScore} from './leaderboard.js';
 
 
 /**
@@ -78,7 +77,6 @@ export class Game {
     this.listeJoueur[(this.player + 1) % 2].invulnerabilite();
     this.listeJoueur[this.player].bomber = true;
     this.listeJoueur[(this.player + 1) % 2].bomber = false;
-    console.log('o');
 
     if (this.change === 0) {
       this.audio.pause();
@@ -133,6 +131,16 @@ export class Game {
    */
   showWin(playerName, score) {
     this.audio.pause();
+    if (Math.random()>0.5) {
+      this.audio = new Audio(
+          './assets/soundtrack/win1.mp3',
+      );
+    } else {
+      this.audio = new Audio(
+          './assets/soundtrack/win2.mp3',
+      );
+    }
+    this.audio.play();
     return $('<div></div>')
         .addClass('conclusionGame')
         .css('text-align', 'center')
@@ -148,13 +156,8 @@ export class Game {
             .addClass('btn btn-success')
             .text('Go leaderboard')
             .on('click', ()=>{
-              $('body').css('overflow', '');
-              $('.containerMaster').remove();
-              $('#map').remove();
               enregistrerScore(playerName, score);
-              $('body').append(tableauMeilleurScore()); // avec le score
-              $('#boutonPartie').append(startButton());
-              fillScore();
+              location.reload();
             }),
         )
     ;

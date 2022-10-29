@@ -52,7 +52,6 @@ export const MAP = {
     10: 'cactus3',
   },
 
-
   reverseTiles(listTiles) {
     const newDict = {};
     Object.keys(listTiles).forEach((layer) => {

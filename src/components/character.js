@@ -82,8 +82,7 @@ export default class Character {
    * Met en évidence le joueur quand il est chasseur.
    */
   setBomb() {
-    const c = $('#' + this.player + 'Canvas').get(0);
-    const ctx = c.getContext('2d');
+    const ctx = $('#' + this.player + 'Canvas').get(0).getContext('2d');
     ctx.beginPath();
     ctx.lineWidth = 5;
     ctx.arc(
@@ -96,6 +95,22 @@ export default class Character {
 
     ctx.strokeStyle = '#FF0000';
     ctx.stroke();
+  }
+
+  /**
+   * Retourne un text contenant la liste des touches pour
+   * faire bouger le personnage.
+   * @return {Object}
+   */
+  returnCommandList() {
+    const listMouvement = ['Gauche', 'Droite', 'Haut', 'Bas'];
+    let text = '';
+    let post = 0;
+    Object.keys(PLAYER[this.idPlayer].commands).forEach((command) => {
+      text += listMouvement[post] + ' : ' + command + ', ';
+      post ++;
+    });
+    return $('<div></div>').text(text);
   }
 
   /**
@@ -225,8 +240,10 @@ export default class Character {
           this.gestionVitesse(valeur, dataMove);
         }
         if (this.vul) {
-          const x2 = this.player2.positionX;
-          const y2 = this.player2.positionY;
+          const x2 = this.player2.positionX +
+                      (this.stage.width * this.sizeMulti)/ 2;
+          const y2 = this.player2.positionY +
+                      (this.stage.height * this.sizeMulti) / 2;
           if (
             x2 >= this.positionX &&
             x2 < this.positionX + this.stage.width * this.sizeMulti &&
